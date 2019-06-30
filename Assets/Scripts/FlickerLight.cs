@@ -1,68 +1,73 @@
-﻿using Light2D;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[RequireComponent(typeof(MeshRenderer))]
-public class FlickerLight : MonoBehaviour
+﻿namespace WGJ.PuppetShadow
 {
-    [SerializeField]
-    [Range(0, 0.3f)]
-    private float lightOnDuration;
-    [SerializeField]
-    [Range(0, 4)]
-    private float lightOffDuration;
 
-    [SerializeField]
-    private bool randomFlicker = false;
 
-    [SerializeField]
-    private Vector2 randomFlickerRange;
+    using Light2D;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-    private float timer = 0f;
-    private float duration = 0f;
-    private MeshRenderer mr;
-
-    private void Awake()
+    [RequireComponent(typeof(MeshRenderer))]
+    public class FlickerLight : MonoBehaviour
     {
-        mr = GetComponent<MeshRenderer>();
-    }
+        [SerializeField]
+        [Range(0, 0.3f)]
+        private float lightOnDuration;
+        [SerializeField]
+        [Range(0, 4)]
+        private float lightOffDuration;
 
-    private void Start()
-    {
-        mr.enabled = false;
-        duration = lightOffDuration;
-    }
+        [SerializeField]
+        private bool randomFlicker = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > duration)
+        [SerializeField]
+        private Vector2 randomFlickerRange;
+
+        private float timer = 0f;
+        private float duration = 0f;
+        private MeshRenderer mr;
+
+        private void Awake()
         {
-            SwitchLight();
+            mr = GetComponent<MeshRenderer>();
         }
-    }
 
-    public void SwitchLight()
-    {
-        if (mr.enabled)
+        private void Start()
         {
-            if (randomFlicker)
+            mr.enabled = false;
+            duration = lightOffDuration;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            timer += Time.deltaTime;
+            if (timer > duration)
             {
-                duration = Random.Range(randomFlickerRange.x, randomFlickerRange.y);
+                SwitchLight();
+            }
+        }
+
+        public void SwitchLight()
+        {
+            if (mr.enabled)
+            {
+                if (randomFlicker)
+                {
+                    duration = Random.Range(randomFlickerRange.x, randomFlickerRange.y);
+                }
+                else
+                {
+                    duration = lightOffDuration;
+                }
             }
             else
             {
-                duration = lightOffDuration;
+                duration = lightOnDuration;
             }
-        }
-        else
-        {
-            duration = lightOnDuration;
-        }
 
-        mr.enabled = !mr.enabled;
-        timer = 0f;
+            mr.enabled = !mr.enabled;
+            timer = 0f;
+        }
     }
 }
