@@ -12,9 +12,13 @@
         private PlayerCharacter player;
 
         [SerializeField]
+        private Transform bulletsParent;
+
+        [SerializeField]
         private Camera mainCamera;
 
         public PlayerCharacter Player { get => player; set => player = value; }
+        public Transform BulletsParent { get => bulletsParent;  }
 
         // Start is called before the first frame update
         void Start()
