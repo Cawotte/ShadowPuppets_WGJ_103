@@ -19,8 +19,12 @@
 
         [SerializeField]
         private GameObject bulletPrefab;
+        [SerializeField]
+        private Transform nuzzle;
 
+        private bool isFacingRight = true;
         private bool shotInCooldown = false;
+        private Vector2 mouseDirection = Vector2.zero;
 
         private void Start()
         {
@@ -35,18 +39,25 @@
                 Fire();
             }
 
-            LookTowardMouse();
+            AimTowardMouse();
         }
 
-        private void LookTowardMouse()
+        private void AimTowardMouse()
         {
-            //away?
-
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 perpendicular = mousePos - transform.position;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, perpendicular);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, GetMouseDirection()) * Quaternion.Euler(0, 0, -90);
+            AdjustRotationGun();
         }
 
+        private void AdjustRotationGun()
+        {
+            float x = GetMouseDirection().x;
+
+            isFacingRight = x > 0f;
+            if (isFacingRight)
+            {
+                transform.rotation *= Quaternion.Euler(180, 0, 0);
+            }
+        }
         private void Fire()
         {
             SpawnBullet();
@@ -57,11 +68,11 @@
         private void SpawnBullet()
         {
             GameObject bullet = Instantiate(bulletPrefab, LevelManager.Instance.BulletsParent);
-            bullet.transform.position = transform.position; //nuzzle
-            bullet.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
+            bullet.transform.position = nuzzle.position; //nuzzle
+            bullet.transform.rotation = transform.rotation;
 
             //direction is mouse
-            bullet.GetComponent<Bullet>().Direction = GetMouseDirection();
+            bullet.GetComponent<Bullet>().Direction = GetMouseDirection().normalized * -1f;
 
             bullet.SetActive(true);
 
@@ -70,8 +81,9 @@
         private Vector2 GetMouseDirection()
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            return mousePos - transform.position;
+            return transform.position - mousePos;
         }
+
         private IEnumerator _FlashShot()
         {
             float timer = 0f;
@@ -85,6 +97,7 @@
             
             flashShot.enabled = false;
         }
+
         private IEnumerator _ShotCooldown()
         {
             float timer = 0f;
