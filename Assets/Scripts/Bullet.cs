@@ -9,6 +9,7 @@
 
         [SerializeField] private float velocity = 1f;
         [SerializeField] private float maxLifetime = 3f;
+        [SerializeField] private int damage = 1;
 
         private Rigidbody2D rb;
         private Vector2 direction = Vector2.zero;
@@ -42,10 +43,26 @@
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.tag.Equals("Player"))
+            Character character = collision.GetComponent<Character>();
+
+            //If it's a trigger or the player, ignore it.
+            if (collision.isTrigger && character == null)
             {
-                Destroy(gameObject);
+                return;
             }
+            
+            if (character != null)
+            {
+                /*
+                if (!character.IsTangible)
+                {
+                    return;
+                }*/
+                character.DealDamage(damage);
+            }
+
+            //Destroy on touch
+            Destroy(gameObject);
         }
     }
 

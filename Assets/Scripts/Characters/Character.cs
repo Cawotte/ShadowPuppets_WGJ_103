@@ -10,7 +10,7 @@
 
         private Rigidbody2D rb;
         [SerializeField]
-        protected int totalLife;
+        private int totalLife;
         [SerializeField]
         private int currentLife;
 
@@ -19,13 +19,15 @@
         [SerializeField]
         protected float jumpStrenght = 6f;
 
+        [SerializeField]
+        private int contactDamage = 0;
+
 
         [Range(0, .3f)]
         [SerializeField]
         private float movementSmoothing = .13f; // How much to smooth out the movement
 
-        private bool isInvincible = false;
-
+        protected bool isInvincible = false;
         //Events
         public Action<int> OnDamageTaken = null;
         public Action<int> OnLifeChange = null;
@@ -51,6 +53,9 @@
                 OnLifeChange?.Invoke(newValue);
             }
         }
+        
+        public int TotalLife { get => totalLife;  }
+        public int ContactDamage { get => contactDamage; }
 
         #endregion
         protected virtual void Awake()
@@ -58,6 +63,8 @@
             rb = GetComponent<Rigidbody2D>();
 
             currentLife = totalLife;
+
+            OnDamageTaken += (num) => StartCoroutine(_RedBlink());
         }
 
         #region Public Methods
@@ -75,11 +82,14 @@
             }
 
             CurrentLife -= damage;
+            OnDamageTaken?.Invoke(damage);
 
             if (CurrentLife <= 0)
             {
                 OnDeath?.Invoke();
+                Debug.Log(gameObject.name + "dies.");
                 Destroy(gameObject);
+                Debug.Log(gameObject.name + "dead.");
                 return true;
             }
 
@@ -123,6 +133,24 @@
         protected void Jump()
         {
             rb.AddForce(Vector2.up * jumpStrenght * jumpForceMultiplier);
+        }
+
+        protected IEnumerator _RedBlink()
+        {
+            float timer = 0f;
+
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            Color originalColor = sr.color;
+            sr.color = Color.red;
+
+            while (timer < 0.1f)
+            {
+                yield return null;
+                timer += Time.fixedDeltaTime;
+            }
+
+            sr.color = originalColor;
+
         }
     }
 

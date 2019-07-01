@@ -19,11 +19,11 @@ TagManager:
   - 
   - Bullet
   - Trigger
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Ghost
+  - Puppet
+  - Player
+  - Contact
   - 
   - 
   - 
