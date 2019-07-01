@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3029433923112876392
 Transform:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029433923112876393}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20.84, y: 1.66, z: 0.6410341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -282,6 +282,7 @@ MonoBehaviour:
   currentLife: 0
   speed: 2.5
   jumpStrenght: 6
+  isPathing: 0
   contactDamage: 1
   movementSmoothing: 0.13
   healAmount: 2

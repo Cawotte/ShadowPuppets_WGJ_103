@@ -5,7 +5,7 @@
 
     public class CameraFollow : MonoBehaviour
     {
-
+        [SerializeField]
         private Transform target;
 
         [SerializeField]
@@ -24,7 +24,8 @@
         // Start is called before the first frame update
         void Start()
         {
-            target = LevelManager.Instance.Player.transform;
+            if (target == null)
+                target = LevelManager.Instance.Player.transform;
         }
 
         // Update is called once per frame

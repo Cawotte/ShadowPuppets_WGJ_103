@@ -19,6 +19,11 @@
         [SerializeField]
         protected float jumpStrenght = 6f;
 
+
+        [SerializeField]
+        protected bool isPathing = false;
+        private Vector3 targetPath;
+
         [SerializeField]
         private int contactDamage = 0;
 
@@ -142,6 +147,21 @@
             rb.AddForce(Vector2.up * jumpStrenght * jumpForceMultiplier);
         }
 
+        protected void MoveTo(Vector3 targetWorldPos)
+        {
+            TilePath path = LevelManager.Instance.Pathfinder.GetPath(transform.position, targetWorldPos);
+
+            if (path.IsEmpty)
+                return;
+
+            StartCoroutine(_FollowPath(path.SimplifiedPath));
+        }
+
+
+        protected bool IsVeryCloseTo(Vector3 worldPos) {
+            return Vector3.Distance(transform.position, worldPos) < 0.1f;
+        }
+
         protected IEnumerator _RedBlink()
         {
             float timer = 0f;
@@ -158,6 +178,32 @@
 
             sr.color = originalColor;
 
+        }
+
+        protected IEnumerator _FollowPath(TilePath path)
+        {
+            isPathing = true;
+            for (int i = 0; i < path.Size; i++)
+            {
+                targetPath = path[i].CenterWorld;
+                rb.velocity = (targetPath - transform.position).normalized * speed;
+                while (!IsVeryCloseTo(path[i].CenterWorld))
+                {
+                    yield return null;
+                    rb.velocity = (targetPath - transform.position).normalized * speed;
+                }
+            }
+            rb.velocity = Vector2.zero;
+            isPathing = false;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (targetPath != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, targetPath);
+            }
         }
     }
 

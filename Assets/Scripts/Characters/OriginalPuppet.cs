@@ -21,6 +21,14 @@
             CreateShadowPuppet();
         }
 
+        private void Update()
+        {
+            if (!isPathing)
+            {
+                MoveTo(LevelManager.Instance.TestMarker.position);
+            }
+        }
+
         private void DestroyShadowPuppet()
         {
             shadowPuppet.SpawnLightPuppet();
