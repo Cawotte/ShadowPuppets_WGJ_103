@@ -29,6 +29,7 @@ namespace Light2D
         private Renderer _oldGameSpriteRenderer;
         private SpriteRenderer _oldUnitySprite;
         private CustomSprite _oldCustomSprite;
+        
 
         protected override void OnEnable()
         {
@@ -38,12 +39,13 @@ namespace Light2D
                 Material = AssetDatabase.LoadAssetAtPath<Material>("Assets/Light2D/Materials/DualColor.mat");
             }
 #endif
+            
 
             base.OnEnable();
 
             if (GameSpriteRenderer == null && transform.parent != null)
                 GameSpriteRenderer = transform.parent.gameObject.GetComponent<Renderer>();
-
+            
             gameObject.layer = LightingSystem.Instance.LightObstaclesLayer;
 
             UpdateMeshData(true);

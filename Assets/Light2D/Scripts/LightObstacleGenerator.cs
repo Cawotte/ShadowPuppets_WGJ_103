@@ -32,7 +32,7 @@ namespace Light2D
         public Material Material;
 
         public float LightObstacleScale = 1;
-
+        
         private void Start()
         {
 #if UNITY_EDITOR
@@ -51,12 +51,13 @@ namespace Light2D
             obstacleObj.transform.localPosition = Vector3.zero;
             obstacleObj.transform.localRotation = Quaternion.identity;
             obstacleObj.transform.localScale = Vector3.one*LightObstacleScale;
+
             if (LightingSystem.Instance != null)
                 obstacleObj.layer = LightingSystem.Instance.LightObstaclesLayer;
 
             if (GetComponent<SpriteRenderer>() != null || GetComponent<CustomSprite>() != null)
             {
-                var obstacleSprite = obstacleObj.AddComponent<LightObstacleSprite>();
+                LightObstacleSprite obstacleSprite = obstacleObj.AddComponent<LightObstacleSprite>();
                 obstacleSprite.Color = MultiplicativeColor;
                 obstacleSprite.AdditiveColor = AdditiveColor;
                 obstacleSprite.Material = Material;

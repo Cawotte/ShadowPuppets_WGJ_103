@@ -14,29 +14,25 @@
         protected override void Awake()
         {
             base.Awake();
-            //OnDeath += DestroyShadowPuppet;
+            OnDeath += DestroyShadowPuppet;
         }
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            CreateShadowPuppet();
         }
 
         private void DestroyShadowPuppet()
         {
-            shadowPuppet.DealDamage(shadowPuppet.TotalLife);
+            shadowPuppet.SpawnLightPuppet();
+            Destroy(shadowPuppet.gameObject);
         }
 
         private void CreateShadowPuppet()
         {
-            shadowPuppet = Instantiate(shadowPuppetPrefab, transform).GetComponent< ShadowPuppet>();
-            shadowPuppet.transform.position += Vector3.left * 3f;
+            shadowPuppet = Instantiate(shadowPuppetPrefab, transform.parent).GetComponent<ShadowPuppet>();
+            shadowPuppet.transform.position += Vector3.right * 3f;
+
+            shadowPuppet.gameObject.SetActive(true);
 
 
         }

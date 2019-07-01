@@ -30,6 +30,7 @@
         protected bool isInvincible = false;
         //Events
         public Action<int> OnDamageTaken = null;
+        public Action<int> OnHeal = null;
         public Action<int> OnLifeChange = null;
         public Action OnDeath = null;
 
@@ -94,6 +95,12 @@
             }
 
             return false;
+        }
+
+        public void Heal(int heal)
+        {
+            CurrentLife += heal;
+            OnHeal?.Invoke(heal);
         }
 
         #endregion
