@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class OriginalPuppet : Character
+    public class OriginalPuppet : Puppet
     {
         [SerializeField]
         private GameObject shadowPuppetPrefab;
