@@ -37,6 +37,11 @@
                 Jump();
             }
 
+            if (Input.GetButtonDown("Fire2"))
+            {
+                InteractWithNearInteractables();
+            }
+
         }
 
 

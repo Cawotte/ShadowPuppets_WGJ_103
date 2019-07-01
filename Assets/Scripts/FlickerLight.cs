@@ -11,17 +11,19 @@
     public class FlickerLight : MonoBehaviour
     {
         [SerializeField]
-        [Range(0, 0.3f)]
+        [Range(0, 4f)]
         private float lightOnDuration;
         [SerializeField]
-        [Range(0, 4)]
+        [Range(0, 4f)]
         private float lightOffDuration;
 
         [SerializeField]
         private bool randomFlicker = false;
 
         [SerializeField]
-        private Vector2 randomFlickerRange;
+        private Vector2 randomFlickerRangeOn;
+        [SerializeField]
+        private Vector2 randomFlickerRangeOff;
 
         private float timer = 0f;
         private float duration = 0f;
@@ -54,7 +56,7 @@
             {
                 if (randomFlicker)
                 {
-                    duration = Random.Range(randomFlickerRange.x, randomFlickerRange.y);
+                    duration = Random.Range(randomFlickerRangeOff.x, randomFlickerRangeOff.y);
                 }
                 else
                 {
@@ -63,7 +65,14 @@
             }
             else
             {
-                duration = lightOnDuration;
+                if (randomFlicker)
+                {
+                    duration = Random.Range(randomFlickerRangeOn.x, randomFlickerRangeOn.y);
+                }
+                else
+                {
+                    duration = lightOnDuration;
+                }
             }
 
             mr.enabled = !mr.enabled;

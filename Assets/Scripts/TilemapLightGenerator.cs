@@ -69,7 +69,7 @@ public class TilemapLightGenerator : MonoBehaviour
         sr.sprite = tile.Sprite;
 
         //Copy Component
-        CopyComponent<LightObstacleGenerator>(lightGen, shadowObject);
+        CopyComponent<LightObstacleGenerator>(lightGen, shadowObject).enabled = true;
 
         shadowObject.SetActive(true);
     }
