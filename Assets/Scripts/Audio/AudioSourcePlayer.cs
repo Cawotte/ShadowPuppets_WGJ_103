@@ -29,11 +29,12 @@
         private int availableCount;
 
         [Serializable]
-        private struct Playing
+        private class Playing
         {
             public Sound Sound;
             public AudioSource Source;
             public string Name;
+            public Action OnPlayEnd;
         }
 
         private void Update()
@@ -42,7 +43,7 @@
             availableCount = availableAudioSources.Count;
         }
 
-        public void PlayRandomFromList(string listName)
+        public void PlayRandomFromList(string listName, Action onEndPlay = null)
         {
             //Does the sound exist ?
             SoundList soundList = AudioManager.Instance.FindList(listName);
@@ -58,10 +59,10 @@
 
             Sound sound = soundList.GetRandom();
 
-            PlaySound(sound, listName);
+            PlaySound(sound, listName, onEndPlay);
         }
 
-        public void PlaySound(string name)
+        public void PlaySound(string name, Action onEndPlay = null)
         {
             
             if (IsCurrentlyPlayed(name))
@@ -75,7 +76,7 @@
             if (sound == null) return;
 
 
-            PlaySound(sound, name);
+            PlaySound(sound, name, onEndPlay);
             
         }
 
@@ -83,56 +84,58 @@
         {
 
             //Does the sound exist ?
-            Sound sound = null;
-            AudioSource source = null;
+            Playing play;
 
-            if (!IsCurrentlyPlayed(name, out sound, out source))
+            if (!IsCurrentlyPlayed(name, out play))
             {
                 return;
             }
             
-            FreeAudioSource(source);
+            FreeAudioSource(play.Source);
         }
 
         public bool IsCurrentlyPlayed(string name)
         {
-            AudioSource source = null;
-            Sound sound = null;
-            return IsCurrentlyPlayed(name, out sound, out source);
+            Playing play = null;
+            return IsCurrentlyPlayed(name, out play);
         }
 
-        private bool IsCurrentlyPlayed(string name, out Sound sound, out AudioSource source)
+        private bool IsCurrentlyPlayed(string name, out Playing play)
         {
-            source = null;
-            sound = null;
+            play = null;
             foreach (Playing playing in currentlyPlaying)
             {
                 if (playing.Name.Equals(name))
                 {
-                    source = playing.Source;
-                    sound = playing.Sound;
+                    play = playing;
                     return true;
                 }
             }
             return false;
         }
 
-        private void PlaySound(Sound sound, string name)
+        private bool IsCurrentlyPlayed(Playing play)
+        {
+            return currentlyPlaying.Contains(play);
+        }
+
+        private void PlaySound(Sound sound, string name, Action onEndPlay = null)
         {
             AudioSource source;
 
             source = GetAvailableAudioSource();
             source.enabled = true;
 
-            Playing newSound;
-            newSound.Name = name;
-            newSound.Sound = sound;
-            newSound.Source = source;
-            currentlyPlaying.Add(newSound);
+            Playing playing = new Playing();
+            playing.Name = name;
+            playing.Sound = sound;
+            playing.Source = source;
+            playing.OnPlayEnd = onEndPlay;
+            currentlyPlaying.Add(playing);
 
             if (!sound.Loop)
             {
-                StartCoroutine(_PlaySoundOnce(source, sound));
+                StartCoroutine(_PlaySoundOnce(playing));
             }
             else
             {
@@ -141,8 +144,11 @@
             }
         }
 
-        private IEnumerator _PlaySoundOnce(AudioSource source, Sound sound)
+        private IEnumerator _PlaySoundOnce(Playing playing)
         {
+            AudioSource source = playing.Source;
+            Sound sound = playing.Sound;
+
             AudioManager.LoadSound(source, sound);
             source.loop = false;
             source.Play();
@@ -150,37 +156,15 @@
 
             yield return new WaitForSeconds(source.clip.length);
 
+            if (!IsCurrentlyPlayed(playing))
+            {
+                yield break;
+            }
+
             FreeAudioSource(source);
+            playing.OnPlayEnd?.Invoke();
+            
         }
-
-        /*
-        private bool IsCurrentlyPlayed(string listName, out AudioSource source)
-        {
-            source = null;
-            foreach (Sound s in currentlyPlayed.Keys)
-            {
-                if (s.ListName.Equals(listName))
-                {
-                    source = currentlyPlayed[s];
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private bool IsCurrentlyPlayed(Sound sound, out AudioSource source)
-        {
-            source = null;
-            foreach (Sound s in currentlyPlayed.Keys)
-            {
-                if (s.name.Equals(sound.name))
-                {
-                    source = currentlyPlayed[s];
-                    return true;
-                }
-            }
-            return false;
-        } */
 
         private AudioSource GetAvailableAudioSource()
         {
