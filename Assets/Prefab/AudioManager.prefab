@@ -139,7 +139,7 @@ MonoBehaviour:
       pitch: 1
       loop: 0
       minDistance: 1
-      maxDistance: 5
+      maxDistance: 15
       source: {fileID: 0}
       ListName: 
     - name: puppetClink2
@@ -148,7 +148,7 @@ MonoBehaviour:
       pitch: 1
       loop: 0
       minDistance: 1
-      maxDistance: 5
+      maxDistance: 15
       source: {fileID: 0}
       ListName: 
     - name: puppetClink3
@@ -157,7 +157,7 @@ MonoBehaviour:
       pitch: 1
       loop: 0
       minDistance: 1
-      maxDistance: 5
+      maxDistance: 15
       source: {fileID: 0}
       ListName: 
     - name: puppetClink4
@@ -166,7 +166,7 @@ MonoBehaviour:
       pitch: 1
       loop: 0
       minDistance: 1
-      maxDistance: 5
+      maxDistance: 15
       source: {fileID: 0}
       ListName: 
     - name: puppetClink5
@@ -175,7 +175,7 @@ MonoBehaviour:
       pitch: 1
       loop: 0
       minDistance: 1
-      maxDistance: 5
+      maxDistance: 15
       source: {fileID: 0}
       ListName: 
   - listName: puppetDamaged
