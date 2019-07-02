@@ -135,9 +135,14 @@ MonoBehaviour:
   currentLife: 0
   speed: 2.5
   jumpStrenght: 6
-  isPathing: 0
   contactDamage: 0
   movementSmoothing: 0.13
+  isPathing: 0
+  closeRangeValue: 0.4
+  amplitude: 1.5
+  frequency: 8
+  currentVelocity: {x: 0, y: 0}
+  observedSpeed: 0
   shadowPuppetPrefab: {fileID: 3029433923112876393, guid: cf2630a48530d6243a56dd915a6ae013,
     type: 3}
 --- !u!61 &1768716204150387272
@@ -174,7 +179,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768716204150387274}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
