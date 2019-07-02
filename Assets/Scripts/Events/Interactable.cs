@@ -21,11 +21,21 @@
         [SerializeField]
         private UnityEvent OnTriggerOffEvent = null;
 
+        [ReadOnly]
         [SerializeField]
         protected bool isOn = false;
+        
+        [SerializeField]
+        private Sprite otherSprite;
+
+        private SpriteRenderer sr;
 
         public bool IsOn { get => isOn;}
 
+        protected virtual void Awake()
+        {
+            sr = GetComponent<SpriteRenderer>();
+        }
         public void SwitchOnOff()
         {
             OnTriggerEvent?.Invoke();
@@ -45,6 +55,13 @@
             }
 
             isOn = !isOn;
+
+            if (otherSprite != null)
+            {
+                Sprite temp = sr.sprite;
+                sr.sprite = otherSprite;
+                otherSprite = temp;
+            }
         }
 
 
