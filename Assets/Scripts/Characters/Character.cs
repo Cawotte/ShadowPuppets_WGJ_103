@@ -60,8 +60,11 @@
         }
         
         public int TotalLife { get => totalLife;  }
+        public bool IsMoving { get => isMoving; }
 
         #endregion
+
+        #region MonoBehaviour Loop
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -79,6 +82,8 @@
             velocity = rb.velocity;
             observedSpeed = rb.velocity.magnitude;
         }
+
+        #endregion
 
         #region Public Methods
 
@@ -100,9 +105,7 @@
             if (CurrentLife <= 0)
             {
                 OnDeath?.Invoke();
-                Debug.Log(gameObject.name + "dies.");
                 Destroy(gameObject);
-                Debug.Log(gameObject.name + "dead.");
                 return true;
             }
 
@@ -122,10 +125,7 @@
             Vector3 movement = direction * Time.fixedDeltaTime * speed;
             rb.MovePosition(transform.position + movement);
         }
-
-
-
-
+        
 
         protected IEnumerator _RedBlink()
         {

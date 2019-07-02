@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class LightPuppet : Character
+    public class LightPuppet : Puppet
     {
         [Header("Light Puppet")]
         [SerializeField]
@@ -23,6 +23,7 @@
 
         private void Start()
         {
+            stateMachine = new StateMachine(new StatePursuit(), this);
             StartCoroutine(_LateLight());
         }
 

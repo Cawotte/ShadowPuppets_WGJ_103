@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Puppet : Character
+    public abstract class Puppet : Character
     {
 
         [SerializeField]
@@ -36,9 +36,17 @@
         private float randomOffsetCos;
         private float randomOffsetSin;
 
+        protected StateMachine stateMachine;
+
         protected Coroutine movementCoroutine = null;
 
-        protected void MoveTo(Vector3 targetWorldPos)
+        protected void Update()
+        {
+            stateMachine.Update();
+        }
+
+        #region Public Methods
+        public void MoveTo(Vector3 targetWorldPos)
         {
             TilePath path = LevelManager.Instance.Pathfinder.GetPath(transform.position, targetWorldPos);
 
@@ -46,15 +54,27 @@
                 return;
 
             movementCoroutine = StartCoroutine(_FollowPath(path.SimplifiedPath));
-            StopCoroutine(movementCoroutine);
         }
 
         public void StopMovement()
         {
 
-            StopCoroutine(movementCoroutine);
+            if (movementCoroutine != null)
+                StopCoroutine(movementCoroutine);
             movementCoroutine = null;
+            rb.velocity = Vector2.zero;
+            isMoving = false;
         }
+
+        public void StartIdlingFloat(float time)
+        {
+            movementCoroutine = StartCoroutine(_IdleFloating(time));
+        }
+        #endregion
+
+        #region Private Methods
+
+        #region Coroutines
         private IEnumerator _FollowPath(TilePath path)
         {
             isPathing = true;
@@ -79,7 +99,7 @@
             
         }
 
-        protected IEnumerator _IdleFloating(float maxTime = 5f)
+        private IEnumerator _IdleFloating(float maxTime = 5f)
         {
             float timer = 0f;
             GenerateNewRandomOffset();
@@ -99,8 +119,9 @@
             
 
         }
+        #endregion
 
-        protected bool IsVeryCloseTo(Vector3 worldPos)
+        private bool IsVeryCloseTo(Vector3 worldPos)
         {
             return Vector3.Distance(transform.position, worldPos) < closeRangeValue;
         }
@@ -151,6 +172,7 @@
             randomOffsetCos = UnityEngine.Random.Range(0f, 1f); 
         }
 
+        #endregion
         private void OnDrawGizmos()
         {
             if (targetPos != null)

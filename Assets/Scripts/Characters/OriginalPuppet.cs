@@ -20,27 +20,22 @@
         private void Start()
         {
             CreateShadowPuppet();
+            stateMachine = new StateMachine(new StateHide(), this);
         }
-
-        private void Update()
-        {
-
-            if (movementCoroutine == null)
-            {
-                movementCoroutine = StartCoroutine(_IdleFloating());
-            }
-        }
-
+        
         private void DestroyShadowPuppet()
         {
-            shadowPuppet.SpawnLightPuppet();
-            Destroy(shadowPuppet.gameObject);
+            shadowPuppet.DealDamage(shadowPuppet.TotalLife);
+            //Destroy(shadowPuppet.gameObject);
         }
 
         private void CreateShadowPuppet()
         {
             shadowPuppet = Instantiate(shadowPuppetPrefab, transform.parent).GetComponent<ShadowPuppet>();
-            shadowPuppet.transform.position += Vector3.right * 3f;
+            shadowPuppet.transform.position = transform.position;
+            shadowPuppet.transform.rotation = transform.rotation;
+            shadowPuppet.transform.localScale = transform.localScale;
+            //shadowPuppet.transform.position += Vector3.right * 3f;
 
             shadowPuppet.gameObject.SetActive(true);
 

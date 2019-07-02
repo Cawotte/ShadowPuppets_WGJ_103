@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class ShadowPuppet : Character
+    public class ShadowPuppet : Puppet
     {
         [Header("Shadow Puppet")]
 
@@ -22,6 +22,13 @@
             base.Awake();
             puppetColl = GetComponentInChildren<PuppetCollider>();
             puppetColl.OnPlayerContact += (charac) => charac.DealDamage(contactDamage);
+
+            OnDeath += SpawnLightPuppet;
+        }
+
+        private void Start()
+        {
+            stateMachine = new StateMachine(new StatePursuit(), this);
         }
 
         public void SpawnLightPuppet()
