@@ -35,14 +35,31 @@
         
         private float randomOffsetCos;
         private float randomOffsetSin;
+        private Animator animator;
+        private bool isFacingRight;
 
         protected StateMachine stateMachine;
 
         protected Coroutine movementCoroutine = null;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            animator = GetComponent<Animator>();
+        }
+
         protected void Update()
         {
             stateMachine.Update();
+        }
+
+        protected override void LateUpdate()
+        {
+            base.LateUpdate();
+
+            FacePlayer();
+
+            animator.SetBool("isMoving", isMoving);
         }
 
         #region Public Methods
@@ -121,6 +138,23 @@
         }
         #endregion
 
+        private void FacePlayer()
+        {
+            if (!isMoving) return;
+
+            Vector3 direction = LevelManager.Instance.Player.transform.position - transform.position;
+
+            if (direction.x < 0 && isFacingRight)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+                isFacingRight = false;
+            }
+            else if (direction.x > 0 && !isFacingRight)
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+                isFacingRight = true;
+            }
+        }
         private bool IsVeryCloseTo(Vector3 worldPos)
         {
             return Vector3.Distance(transform.position, worldPos) < closeRangeValue;
