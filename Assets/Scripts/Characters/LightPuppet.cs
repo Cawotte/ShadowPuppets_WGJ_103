@@ -7,6 +7,7 @@
 
     public class LightPuppet : Character
     {
+        [Header("Light Puppet")]
         [SerializeField]
         private int healAmount = 2;
 

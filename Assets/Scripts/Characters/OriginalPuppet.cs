@@ -6,6 +6,7 @@
 
     public class OriginalPuppet : Puppet
     {
+        [Header("Original Puppet")]
         [SerializeField]
         private GameObject shadowPuppetPrefab;
 
@@ -23,9 +24,10 @@
 
         private void Update()
         {
-            if (!isPathing)
+
+            if (movementCoroutine == null)
             {
-                MoveTo(LevelManager.Instance.TestMarker.position);
+                movementCoroutine = StartCoroutine(_IdleFloating());
             }
         }
 

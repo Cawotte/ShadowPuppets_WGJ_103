@@ -11,12 +11,12 @@
         [SerializeField]
         protected bool isPathing = false;
         protected Vector3 targetPos;
-        
+
+        [Header("Movements")]
+
+        [Header("Pursuit movement parameters")]
         [SerializeField]
         protected float closeRangeValue = 0.3f;
-        //[SerializeField]
-        //protected float cornerBrake = 0.3f;
-
         [SerializeField]
         [Range(0.5f, 5f)]
         protected float amplitude = 1f;
@@ -24,18 +24,19 @@
         [Range(1f, 8f)]
         protected float frequency = 0.3f;
 
-        [SerializeField]
-        [ReadOnly]
-        private Vector2 currentVelocity;
 
-        /*
+        [Header("Idle movement parameters")]
         [SerializeField]
-        [Range(0, 0.5f)]
-        private float coefVelocity; */
+        [Range(0.5f, 10f)]
+        protected float idleAmplitude = 1f;
+        [SerializeField]
+        [Range(1f, 8f)]
+        protected float idleFrequency = 3f;
+        
+        private float randomOffsetCos;
+        private float randomOffsetSin;
 
-        [SerializeField]
-        [ReadOnly]
-        private float observedSpeed;
+        protected Coroutine movementCoroutine = null;
 
         protected void MoveTo(Vector3 targetWorldPos)
         {
@@ -44,12 +45,21 @@
             if (path.IsEmpty)
                 return;
 
-            StartCoroutine(_FollowPath(path.SimplifiedPath));
+            movementCoroutine = StartCoroutine(_FollowPath(path.SimplifiedPath));
+            StopCoroutine(movementCoroutine);
         }
-        protected IEnumerator _FollowPath(TilePath path)
+
+        public void StopMovement()
+        {
+
+            StopCoroutine(movementCoroutine);
+            movementCoroutine = null;
+        }
+        private IEnumerator _FollowPath(TilePath path)
         {
             isPathing = true;
             Vector3 previousPos = transform.position;
+            GenerateNewRandomOffset();
 
             for (int i = 0; i < path.Size; i++)
             {
@@ -64,6 +74,30 @@
             }
             rb.velocity = Vector2.zero;
             isPathing = false;
+
+            movementCoroutine = null;
+            
+        }
+
+        protected IEnumerator _IdleFloating(float maxTime = 5f)
+        {
+            float timer = 0f;
+            GenerateNewRandomOffset();
+            
+            while (timer < maxTime)
+            {
+                rb.velocity = new Vector2(
+                    Cosinus(Time.time, idleAmplitude, idleFrequency),
+                    Sinus(Time.time, idleAmplitude, idleFrequency));
+                yield return null;
+                timer += Time.deltaTime;
+            }
+            rb.velocity = Vector2.zero;
+
+
+            movementCoroutine = null;
+            
+
         }
 
         protected bool IsVeryCloseTo(Vector3 worldPos)
@@ -94,10 +128,7 @@
 
             Vector3 calculatedVelocity = direction + (perpendicular * Cosinus(Time.time, amplitude, frequency) *  perpendicularCoeff);
 
-
-            currentVelocity = calculatedVelocity;
-            observedSpeed = currentVelocity.magnitude;
-
+            
             return calculatedVelocity;
 
 
@@ -106,9 +137,19 @@
         
         private float Cosinus(float t, float amplitude, float frequency)
         {
-            return amplitude * Mathf.Cos(t * frequency);
+            return amplitude * Mathf.Cos( (t + randomOffsetCos) * frequency);
         }
-        
+        private float Sinus(float t, float amplitude, float frequency)
+        {
+            return amplitude * Mathf.Sin((t + randomOffsetSin) * frequency);
+        }
+
+        private void GenerateNewRandomOffset()
+        {
+
+            randomOffsetSin = UnityEngine.Random.Range(0f, 1f); //to avoid synchronized different ghosts
+            randomOffsetCos = UnityEngine.Random.Range(0f, 1f); 
+        }
 
         private void OnDrawGizmos()
         {

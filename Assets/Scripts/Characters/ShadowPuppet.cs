@@ -7,13 +7,13 @@
 
     public class ShadowPuppet : Character
     {
-        [SerializeField]
-        private int healAmount = 2;
+        [Header("Shadow Puppet")]
 
+        [SerializeField]
+        private int contactDamage = 1;
         [SerializeField]
         GameObject lightPuppetPrefab;
-
-
+        
         PuppetCollider puppetColl;
         
 
@@ -21,7 +21,7 @@
         {
             base.Awake();
             puppetColl = GetComponentInChildren<PuppetCollider>();
-            puppetColl.OnPlayerContact += (charac) => charac.DealDamage(ContactDamage);
+            puppetColl.OnPlayerContact += (charac) => charac.DealDamage(contactDamage);
         }
 
         public void SpawnLightPuppet()

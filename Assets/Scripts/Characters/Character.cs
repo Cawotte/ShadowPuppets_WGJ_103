@@ -7,41 +7,42 @@
 
     public class Character : MonoBehaviour
     {
-
+        [Header("General Character")]
         protected Rigidbody2D rb;
 
         [SerializeField]
         private int totalLife;
         [SerializeField]
+        [ReadOnly]
         private int currentLife;
 
         [SerializeField]
         protected float speed = 2.5f;
-        [SerializeField]
-        protected float jumpStrenght = 6f;
 
-
+        [Header("Status")]
 
         [SerializeField]
-        private int contactDamage = 0;
-
-
-        [Range(0, .3f)]
-        [SerializeField]
-        private float movementSmoothing = .13f; // How much to smooth out the movement
-
         protected bool isInvincible = false;
+        [SerializeField]
+        [ReadOnly]
+        protected bool isMoving = false;
+
         //Events
         public Action<int> OnDamageTaken = null;
         public Action<int> OnHeal = null;
         public Action<int> OnLifeChange = null;
         public Action OnDeath = null;
 
-        private const float speedMultiplier = 100f;
-        private const float jumpForceMultiplier = 100f;
 
+        [Header("Debug Infos")]
         //internals var
-        private Vector3 velocity = Vector3.zero;
+        [SerializeField]
+        [ReadOnly]
+        protected Vector2 velocity = Vector2.zero;
+        [SerializeField]
+        [ReadOnly]
+        protected float observedSpeed;
+
 
         #region Properties
         public int CurrentLife {
@@ -59,7 +60,6 @@
         }
         
         public int TotalLife { get => totalLife;  }
-        public int ContactDamage { get => contactDamage; }
 
         #endregion
         protected virtual void Awake()
@@ -69,6 +69,15 @@
             currentLife = totalLife;
 
             OnDamageTaken += (num) => StartCoroutine(_RedBlink());
+        }
+
+        protected virtual void LateUpdate()
+        {
+            //observe if moving.
+            isMoving = (rb.velocity != Vector2.zero);
+
+            velocity = rb.velocity;
+            observedSpeed = rb.velocity.magnitude;
         }
 
         #region Public Methods
@@ -108,19 +117,6 @@
 
         #endregion
 
-        protected void InteractWithNearInteractables()
-        {
-            Debug.Log("Switch button");
-            Collider2D[] colls = new Collider2D[20];
-            ContactFilter2D contactFilter = new ContactFilter2D();
-            contactFilter.useTriggers = true;
-            GetComponent<Collider2D>().OverlapCollider(contactFilter, colls);
-
-            foreach (Collider2D coll in colls)
-            {
-                coll?.GetComponent<Interactable>()?.SwitchOnOff();
-            }
-        }
         protected void MoveToward(Vector2 direction)
         {
             Vector3 movement = direction * Time.fixedDeltaTime * speed;
@@ -128,22 +124,6 @@
         }
 
 
-        protected void MoveHorizontallyToward(float horizontalMovement)
-        {
-
-
-            float movement = horizontalMovement * Time.fixedDeltaTime * speed * speedMultiplier;
-            
-            // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(movement, rb.velocity.y);
-            // And then smoothing it out and applying it to the character
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, movementSmoothing);
-        }
-
-        protected void Jump()
-        {
-            rb.AddForce(Vector2.up * jumpStrenght * jumpForceMultiplier);
-        }
 
 
 

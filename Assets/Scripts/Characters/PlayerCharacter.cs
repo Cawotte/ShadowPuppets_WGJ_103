@@ -8,10 +8,22 @@
     public class PlayerCharacter : Character
     {
 
+        [Header("Player Character")]
+
+        [SerializeField]
+        protected float jumpStrenght = 6f;
+
+        [Range(0, .3f)]
+        [SerializeField]
+        private float movementSmoothing = .13f; // How much to smooth out the movement
+
         [SerializeField]
         private GunController gunController;
 
         private Vector2 direction;
+
+        private const float speedMultiplier = 100f;
+        private const float jumpForceMultiplier = 100f;
 
         protected override void Awake()
         {
@@ -44,6 +56,38 @@
 
         }
 
+
+        protected void InteractWithNearInteractables()
+        {
+            Debug.Log("Switch button");
+            Collider2D[] colls = new Collider2D[20];
+            ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.useTriggers = true;
+            GetComponent<Collider2D>().OverlapCollider(contactFilter, colls);
+
+            foreach (Collider2D coll in colls)
+            {
+                coll?.GetComponent<Interactable>()?.SwitchOnOff();
+            }
+        }
+
+
+        protected void MoveHorizontallyToward(float horizontalMovement)
+        {
+
+
+            float movement = horizontalMovement * Time.fixedDeltaTime * speed * speedMultiplier;
+            Vector3 veloc = velocity;
+            // Move the character by finding the target velocity
+            Vector3 targetVelocity = new Vector2(movement, rb.velocity.y);
+            // And then smoothing it out and applying it to the character
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref veloc, movementSmoothing);
+        }
+
+        protected void Jump()
+        {
+            rb.AddForce(Vector2.up * jumpStrenght * jumpForceMultiplier);
+        }
 
         private Vector2 GetDirectionFromAxis()
         {
