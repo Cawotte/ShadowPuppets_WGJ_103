@@ -31,5 +31,14 @@
             this.centerWorld = centerWorld;
             this.isObstacle = isObstacle;
         }
+
+        public Vector3 GetRandomSpawnPoint()
+        {
+            return centerWorld +
+                new Vector3(
+                    UnityEngine.Random.Range(-0.4f, 0.4f),
+                    -0.5f,
+                    0f);
+        }
     }
 }

@@ -22,6 +22,8 @@
         [SerializeField]
         private Serializable2DArray<TileNode> mapGrid;
 
+        private List<TileNode> possibleSpawns = new List<TileNode>();
+
         #region Properties
         public Grid Grid
         {
@@ -83,6 +85,7 @@
             this.tilemap = tilemap;
 
             LoadMap();
+            LoadPossibleSpawns();
         }
 
 
@@ -157,6 +160,15 @@
         }
         #endregion
 
+        public TileNode GetRandomSpawnTile()
+        {
+            return possibleSpawns[UnityEngine.Random.Range(0, possibleSpawns.Count)];
+        }
+
+        public Vector3 GetRandomSpawnPoint()
+        {
+            return GetRandomSpawnTile().GetRandomSpawnPoint();
+        }
 
         public static int GetManhattanDistance(Vector2 A, Vector2 B)
         {
@@ -211,5 +223,21 @@
             }
 
         }
+
+        private void LoadPossibleSpawns()
+        {
+            for (int y = 1; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    if (!this[x, y].IsObstacle && this[x, y - 1].IsObstacle)
+                    {
+                        possibleSpawns.Add(this[x, y]);
+                    }
+                }
+            }
+        }
+
+        
     }
 }
