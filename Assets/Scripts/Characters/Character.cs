@@ -9,6 +9,7 @@
     {
         [Header("General Character")]
         protected Rigidbody2D rb;
+        protected AudioSourcePlayer soundPlayer;
 
         [SerializeField]
         private int totalLife;
@@ -26,6 +27,9 @@
         [SerializeField]
         [ReadOnly]
         protected bool isMoving = false;
+        [SerializeField]
+        [ReadOnly]
+        protected bool isOnGround = false;
 
         //Events
         public Action<int> OnDamageTaken = null;
@@ -61,6 +65,7 @@
         
         public int TotalLife { get => totalLife;  }
         public bool IsMoving { get => isMoving; }
+        public AudioSourcePlayer SoundPlayer { get => soundPlayer; }
 
         #endregion
 
@@ -72,12 +77,18 @@
             currentLife = totalLife;
 
             OnDamageTaken += (num) => StartCoroutine(_RedBlink());
+
+            if (soundPlayer == null)
+            {
+                soundPlayer = gameObject.AddComponent<AudioSourcePlayer>();
+            }
         }
 
         protected virtual void LateUpdate()
         {
             //observe if moving.
             isMoving = (rb.velocity != Vector2.zero);
+            isOnGround = rb.velocity.y == 0;
 
             velocity = rb.velocity;
             observedSpeed = rb.velocity.magnitude;

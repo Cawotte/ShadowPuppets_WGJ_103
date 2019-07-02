@@ -7,6 +7,8 @@
     public class GunController : MonoBehaviour
     {
 
+        [HideInInspector] public PlayerCharacter Player; //ugly
+
         [SerializeField]
         [Range(0.1f, 1.5f)]
         private float gunCooldown = 0.3f;
@@ -29,6 +31,7 @@
         private void Start()
         {
             flashShot.enabled = false;
+            Player = GetComponentInParent<PlayerCharacter>();
         }
 
         // Update is called once per frame
@@ -60,6 +63,7 @@
         }
         private void Fire()
         {
+            Player.SoundPlayer.PlaySound("pistolShot");
             SpawnBullet();
             StartCoroutine(_FlashShot());
             StartCoroutine(_ShotCooldown());

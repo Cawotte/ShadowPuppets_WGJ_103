@@ -31,6 +31,7 @@
             if (gunController == null)
             {
                 gunController = GetComponentInChildren<GunController>();
+                gunController.Player = this;
             }
         }
 
@@ -52,6 +53,14 @@
             if (Input.GetButtonDown("Fire2"))
             {
                 InteractWithNearInteractables();
+            }
+
+            if (isMoving && isOnGround)
+            {
+                if (!soundPlayer.IsCurrentlyPlayed("footstep"))
+                {
+                    soundPlayer.PlayRandomFromList("footstep");
+                }
             }
 
         }
