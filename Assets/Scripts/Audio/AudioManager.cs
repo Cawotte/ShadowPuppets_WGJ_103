@@ -59,8 +59,10 @@
             source.volume = sound.Volume;
             source.pitch = sound.Pitch;
             source.loop = sound.Loop;
-            source.minDistance = source.minDistance;
-            source.maxDistance = source.maxDistance;
+            source.minDistance = sound.MinDistance;
+            source.maxDistance = sound.MaxDistance;
+            source.spatialBlend = 1f;
+            source.rolloffMode = AudioRolloffMode.Linear;
         }
 
         //Return the Sound object with the name given. Used by other objets to access the sounds they want to play.

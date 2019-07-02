@@ -60,6 +60,11 @@
             FacePlayer();
 
             animator.SetBool("isMoving", isMoving);
+
+            //Sound
+            if (isMoving && !soundPlayer.IsCurrentlyPlayed("puppetClink")) {
+                soundPlayer.PlayRandomFromList("puppetClink");
+            }
         }
 
         #region Public Methods

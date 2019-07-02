@@ -15,6 +15,7 @@
         protected override void Awake()
         {
             base.Awake();
+            OnDamageTaken += (num) => soundPlayer.PlayRandomFromList("puppetDamaged");
             OnDeath += DestroyShadowPuppet;
         }
         private void Start()
