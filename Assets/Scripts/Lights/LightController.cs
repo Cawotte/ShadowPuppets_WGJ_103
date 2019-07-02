@@ -7,7 +7,7 @@
     public class LightController : MonoBehaviour
     {
         [SerializeField]
-        private MeshRenderer lightRenderer;
+        protected MeshRenderer lightRenderer;
 
         protected AudioSourcePlayer audioPlayer;
 
@@ -15,19 +15,30 @@
         [ReadOnly]
         protected bool isFlicker = false;
 
-        [SerializeField][ReadOnly]
-        protected bool isOn = false;
+        [SerializeField]
+        [ReadOnly]
+        private bool isOn = false;
+
         [SerializeField]
         private bool forceSwitchOn = false;
 
         private int soundIndex = 1;
+
+        protected bool IsOn {
+            get => isOn;
+            set
+            {
+                isOn = value;
+                forceSwitchOn = value;
+            }
+        }
 
         protected virtual void Awake()
         {
             audioPlayer = gameObject.AddComponent<AudioSourcePlayer>();
             isOn = lightRenderer.enabled;
 
-            isOn = forceSwitchOn;
+            IsOn = forceSwitchOn;
         }
 
         protected virtual void Start()
@@ -47,9 +58,8 @@
 
         public virtual void SwitchOnOff()
         {
-            isOn = !isOn;
-            forceSwitchOn = isOn;
-            SwitchOnOff(isOn);
+            SwitchOnOff(!isOn);
+            IsOn = !isOn;
         }
 
         public virtual void SwitchOnOff(bool on)
@@ -65,7 +75,7 @@
             }
         }
 
-        private void PlaySoundLight()
+        protected void PlaySoundLight()
         {
             StopSoundLight();
             
@@ -87,7 +97,7 @@
             soundIndex = UnityEngine.Random.Range(1, 3);
             return soundIndex;
         }
-        private void StopSoundLight()
+        protected void StopSoundLight()
         {
 
             if (!isFlicker)

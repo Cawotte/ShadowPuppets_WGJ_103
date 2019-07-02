@@ -38,7 +38,7 @@
 
         protected override void Start()
         {
-            SwitchOnOff(isOn);
+            SwitchOnOff(IsOn);
         }
 
         // Update is called once per frame
@@ -70,14 +70,14 @@
             
             if (randomFlicker)
             {
-                if (isOn)
+                if (IsOn)
                     return Random.Range(randomFlickerRangeOff.x, randomFlickerRangeOff.y);
                 else
                     return Random.Range(randomFlickerRangeOn.x, randomFlickerRangeOn.y);
             }
             else
             {
-                if (isOn)
+                if (IsOn)
                     return lightOffDuration;
                 else
                     return lightOnDuration;
