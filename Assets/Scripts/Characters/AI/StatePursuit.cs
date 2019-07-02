@@ -61,7 +61,8 @@
         private void Pursuit()
         {
             stateMachine.Puppet.StopMovement();
-            stateMachine.Puppet.MoveTo(stateMachine.Player.transform.position);
+            stateMachine.Puppet.MoveTo(LevelManager.Instance.Player.transform.position);
+            //stateMachine.Puppet.MoveTo(stateMachine.Player.transform.position);
             timePursuit = 0f;
         }
 

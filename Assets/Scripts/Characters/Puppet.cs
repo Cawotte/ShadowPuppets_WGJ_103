@@ -36,7 +36,6 @@
         private float randomOffsetCos;
         private float randomOffsetSin;
         private Animator animator;
-        private bool isFacingRight;
 
         protected StateMachine stateMachine;
 
@@ -147,6 +146,8 @@
         {
             if (!isMoving) return;
 
+            FacePos(LevelManager.Instance.Player.transform.position);
+            /*
             Vector3 direction = LevelManager.Instance.Player.transform.position - transform.position;
 
             if (direction.x < 0 && isFacingRight)
@@ -158,7 +159,7 @@
             {
                 GetComponent<SpriteRenderer>().flipX = false;
                 isFacingRight = true;
-            }
+            }*/
         }
         private bool IsVeryCloseTo(Vector3 worldPos)
         {

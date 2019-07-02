@@ -134,15 +134,17 @@ MonoBehaviour:
   totalLife: 3
   currentLife: 0
   speed: 2.5
-  jumpStrenght: 6
-  contactDamage: 0
-  movementSmoothing: 0.13
+  isInvincible: 0
+  isMoving: 0
+  isOnGround: 0
+  velocity: {x: 0, y: 0}
+  observedSpeed: 0
   isPathing: 0
   closeRangeValue: 0.4
   amplitude: 1.5
   frequency: 8
-  currentVelocity: {x: 0, y: 0}
-  observedSpeed: 0
+  idleAmplitude: 1
+  idleFrequency: 3
   shadowPuppetPrefab: {fileID: 3029433923112876393, guid: cf2630a48530d6243a56dd915a6ae013,
     type: 3}
 --- !u!61 &1768716204150387272
@@ -158,10 +160,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.095915794, y: 0}
+  m_Offset: {x: 0, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5

@@ -61,7 +61,7 @@
         {
             if (timer > 3f)
             {
-                SpawnPuppetAt(PickValidSpawnPoint());
+                //SpawnPuppetAt(PickValidSpawnPoint());
                 timer = 0f;
             }
             timer += Time.deltaTime;

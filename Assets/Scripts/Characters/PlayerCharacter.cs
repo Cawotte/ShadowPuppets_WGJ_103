@@ -33,6 +33,7 @@
                 gunController = GetComponentInChildren<GunController>();
                 gunController.Player = this;
             }
+            transform.rotation *= Quaternion.Euler(0, 180, 0);
         }
 
         // Update is called once per frame
@@ -62,6 +63,8 @@
                     soundPlayer.PlayRandomFromList("footstep");
                 }
             }
+
+            FacePos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
         }
 

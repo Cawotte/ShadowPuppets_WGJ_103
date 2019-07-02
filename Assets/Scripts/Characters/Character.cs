@@ -47,6 +47,8 @@
         [ReadOnly]
         protected float observedSpeed;
 
+        //asset flip
+        protected bool isFacingRight;
 
         #region Properties
         public int CurrentLife {
@@ -130,6 +132,24 @@
         }
 
         #endregion
+
+        protected void FacePos(Vector3 PosToFace)
+        {
+            Vector3 direction = PosToFace - transform.position;
+
+            if (direction.x < 0 && isFacingRight)
+            {
+                transform.rotation *= Quaternion.Euler(0, 180, 0);
+                //GetComponent<SpriteRenderer>().flipX = true;
+                isFacingRight = false;
+            }
+            else if (direction.x > 0 && !isFacingRight)
+            {
+                transform.rotation *= Quaternion.Euler(0, 180, 0);
+                //GetComponent<SpriteRenderer>().flipX = false;
+                isFacingRight = true;
+            }
+        }
 
         protected void MoveToward(Vector2 direction)
         {
