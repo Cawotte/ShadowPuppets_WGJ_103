@@ -35,7 +35,7 @@
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (!shotInCooldown && Input.GetMouseButtonDown(0))
             {

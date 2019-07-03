@@ -50,9 +50,8 @@
             transform.rotation *= Quaternion.Euler(0, 180, 0);
             OnDeath += UIManager.Instance.OpenDeathPanel;
 
-            rb.velocity = Vector2.zero;
-            timerSlowDown = 0.05f;
-            speed = 12.3f;
+
+            StartCoroutine(_ResetVelocity());
         }
 
         // Update is called once per frame
@@ -85,6 +84,19 @@
             FacePos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
 
+        }
+
+        private IEnumerator _ResetVelocity()
+        {
+
+            yield return null;
+            yield return null;
+            yield return null;
+            yield return null;
+            yield return null;
+
+            gameObject.SetActive(false);
+            gameObject.SetActive(true);
         }
 
         private void HorizontalMovement()
