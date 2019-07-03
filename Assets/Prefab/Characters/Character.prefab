@@ -240,7 +240,7 @@ MonoBehaviour:
   isOnGround: 0
   velocity: {x: 0, y: 0}
   observedSpeed: 0
-  jumpStrenght: 5
+  jumpStrenght: 6.5
   movementSmoothing: 0.13
   gunController: {fileID: 3614285341500256023}
 --- !u!58 &3614285339884473927
