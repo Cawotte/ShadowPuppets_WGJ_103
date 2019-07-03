@@ -170,6 +170,19 @@
             return GetRandomSpawnTile().GetRandomSpawnPoint();
         }
 
+        public Vector3 GetRandomEmptyPosition()
+        {
+            TileNode tile;
+            do
+            {
+                tile = this[
+                    UnityEngine.Random.Range(0, Width),
+                    UnityEngine.Random.Range(0, Height)];
+            } while (tile.IsObstacle || tile.CenterWorld.magnitude > 10f);
+
+            return tile.CenterWorld;
+        }
+
         public static int GetManhattanDistance(Vector2 A, Vector2 B)
         {
             return (int)Math.Abs(B.x - A.x) + (int)Math.Abs(B.y - A.y);

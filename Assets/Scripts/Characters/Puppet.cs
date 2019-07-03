@@ -151,7 +151,7 @@
         }
         private bool IsVeryCloseTo(Vector3 worldPos)
         {
-            return Vector3.Distance(transform.position, worldPos) < closeRangeValue;
+            return Vector2.Distance(transform.position, worldPos) < closeRangeValue;
         }
 
         private Vector2 GetGhostVelocityToward(Vector3 previousPos, Vector3 targetPos)
@@ -203,7 +203,7 @@
         #endregion
         private void OnDrawGizmos()
         {
-            if (targetPos != null)
+            if (targetPos != null && !(this is OriginalPuppet))
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(transform.position, targetPos);

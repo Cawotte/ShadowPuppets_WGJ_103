@@ -29,6 +29,7 @@
         }
 
         public Puppet Puppet { get => puppet;  }
+        public Transform Target { get => target;  }
 
         public void Update()
         {

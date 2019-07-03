@@ -35,6 +35,9 @@
         private Pathfinder pathfinder;
 
         [SerializeField]
+        private bool moveAroundMarker = false;
+
+        [SerializeField]
         [ReadOnly]
         private int score = 0;
         [SerializeField]
@@ -67,12 +70,15 @@
         // Update is called once per frame
         void Update()
         {
-            if (timer > 3f)
+            if (moveAroundMarker)
             {
-                //SpawnPuppetAt(PickValidSpawnPoint());
-                timer = 0f;
+                if (timer > 2f)
+                {
+                    MoveTestMarkerAround();
+                    timer = 0f;
+                }
+                timer += Time.deltaTime;
             }
-            timer += Time.deltaTime;
         }
 
         public Transform GetTarget()
@@ -85,6 +91,12 @@
             {
                 return player.transform;
             }
+        }
+
+        public void MoveTestMarkerAround()
+        {
+            testMarker.transform.position = map.GetRandomEmptyPosition();
+
         }
         public void SpawnNewPuppet()
         {
