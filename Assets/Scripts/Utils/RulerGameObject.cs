@@ -6,7 +6,7 @@ public class RulerGameObject : MonoBehaviour
 {
     [SerializeField]
     Transform target;
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (target != null)
@@ -18,4 +18,5 @@ public class RulerGameObject : MonoBehaviour
                 );
         }
     }
+#endif
 }
