@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
@@ -17,19 +18,35 @@
         [SerializeField]
         private GameObject pauseCanvas;
 
+
+        [SerializeField]
+        private GameObject deathCanvas;
+        [SerializeField]
+        private TextMeshProUGUI textDeath;
+
+
         private bool pauseIsEnabled = false;
 
         private void Start()
         {
             mainMenuCanvas.SetActive(showMainMenuCanvasOnStart);
+            deathCanvas.SetActive(false);
+            pauseCanvas.SetActive(false);
         }
 
         private void Update()
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Cancel") && !deathCanvas.activeInHierarchy)
             {
                 PauseTheGame(!pauseIsEnabled);
             }
+        }
+
+        public void OpenDeathPanel()
+        {
+            textDeath.text = "You've defeated " + LevelManager.Instance.Score + " puppets.";
+            deathCanvas.SetActive(true);
+            PauseTheGame(true);
         }
 
         public void PauseTheGame(bool setPause)

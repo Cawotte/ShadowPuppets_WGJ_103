@@ -18,6 +18,7 @@
             OnDamageTaken += (num) => soundPlayer.PlayRandomFromList("puppetDamaged");
             OnDeath += DestroyShadowPuppet;
             OnDeath += () => LevelManager.Instance.CurrentPuppets--;
+            OnDeath += () => LevelManager.Instance.Score++;
         }
         private void Start()
         {

@@ -34,7 +34,7 @@
                 gunController.Player = this;
             }
             transform.rotation *= Quaternion.Euler(0, 180, 0);
-            OnDeath += UIManager.Instance.LoadMainMenu;
+            OnDeath += UIManager.Instance.OpenDeathPanel;
         }
 
         // Update is called once per frame

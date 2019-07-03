@@ -119,7 +119,14 @@
             if (CurrentLife <= 0)
             {
                 OnDeath?.Invoke();
-                Destroy(gameObject);
+                if (this is PlayerCharacter)
+                {
+                    gameObject.SetActive(false);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
                 return true;
             }
 
