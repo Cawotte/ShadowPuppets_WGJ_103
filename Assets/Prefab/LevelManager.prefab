@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6691542694486851640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.0712905, y: -0.54433835, z: 0.044988275}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6691542694988408638}
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6691542694988408636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21053424, y: -0.17593285, z: -0.11458446}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6691542694486851641}
@@ -115,6 +115,7 @@ MonoBehaviour:
   originalPuppetPrefab: {fileID: 1768716204150387274, guid: b56531280bcceb042bacb175c426efd2,
     type: 3}
   testMarker: {fileID: 0}
+  moveAroundMarker: 0
   score: 0
   currentPuppets: 0
 --- !u!114 &861551259

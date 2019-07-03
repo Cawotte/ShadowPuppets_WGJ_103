@@ -39,6 +39,7 @@
                 Gizmos.color = Color.yellow;
                 foreach (LightController light in lightsToSwitch)
                 {
+                    if (light == null) continue;
                     Gizmos.DrawLine(transform.position, light.transform.position);
                 }
             }
