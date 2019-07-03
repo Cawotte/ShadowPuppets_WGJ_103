@@ -17,9 +17,11 @@
             base.Awake();
             OnDamageTaken += (num) => soundPlayer.PlayRandomFromList("puppetDamaged");
             OnDeath += DestroyShadowPuppet;
+            OnDeath += () => LevelManager.Instance.CurrentPuppets--;
         }
         private void Start()
         {
+            LevelManager.Instance.CurrentPuppets++;
             CreateShadowPuppet();
             stateMachine = new StateMachine(new StateHide(), this);
         }

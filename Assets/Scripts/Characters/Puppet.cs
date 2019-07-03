@@ -67,14 +67,15 @@
         }
 
         #region Public Methods
-        public void MoveTo(Vector3 targetWorldPos)
+        public bool MoveTo(Vector3 targetWorldPos)
         {
             TilePath path = LevelManager.Instance.Pathfinder.GetPath(transform.position, targetWorldPos);
 
             if (path.IsEmpty)
-                return;
+                return false;
 
             movementCoroutine = StartCoroutine(_FollowPath(path.SimplifiedPath));
+            return true;
         }
 
         public void StopMovement()

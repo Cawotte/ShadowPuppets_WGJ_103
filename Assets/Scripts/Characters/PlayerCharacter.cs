@@ -71,7 +71,6 @@
 
         protected void InteractWithNearInteractables()
         {
-            Debug.Log("Switch button");
             Collider2D[] colls = new Collider2D[20];
             ContactFilter2D contactFilter = new ContactFilter2D();
             contactFilter.useTriggers = true;

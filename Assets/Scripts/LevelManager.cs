@@ -34,12 +34,20 @@
 
         private Pathfinder pathfinder;
 
+        [SerializeField]
+        [ReadOnly]
+        private int score = 0;
+        [SerializeField]
+        [ReadOnly]
+        private int currentPuppets = 0;
 
         public PlayerCharacter Player { get => player; set => player = value; }
         public Transform BulletsParent { get => bulletsParent;  }
         public Map Map { get => map; }
         public Pathfinder Pathfinder { get => pathfinder; }
         public Transform TestMarker { get => testMarker; }
+        public int Score { get => score; set => score = value; }
+        public int CurrentPuppets { get => currentPuppets; set => currentPuppets = value; }
 
         private float timer = 0f;
         private Vector3 possiblePoint;
@@ -67,6 +75,10 @@
             timer += Time.deltaTime;
         }
 
+        public void SpawnNewPuppet()
+        {
+            SpawnPuppetAt(PickValidSpawnPoint());
+        }
         private Vector3 PickValidSpawnPoint()
         {
             Vector3 spawnPoint;

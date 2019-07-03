@@ -68,7 +68,7 @@
         public int TotalLife { get => totalLife;  }
         public bool IsMoving { get => isMoving; }
         public AudioSourcePlayer SoundPlayer { get => soundPlayer; }
-
+        
         #endregion
 
         #region MonoBehaviour Loop
@@ -78,7 +78,8 @@
 
             currentLife = totalLife;
 
-            OnDamageTaken += (num) => StartCoroutine(_RedBlink());
+            OnDamageTaken += (num) => RedBlink();
+            OnHeal += (num) => GreenBlink();
 
             if (soundPlayer == null)
             {
@@ -156,15 +157,23 @@
             Vector3 movement = direction * Time.fixedDeltaTime * speed;
             rb.MovePosition(transform.position + movement);
         }
-        
 
-        protected IEnumerator _RedBlink()
+        private void RedBlink() {
+            StartCoroutine(_ColorBlink(Color.red));
+        }
+
+        private void GreenBlink()
+        {
+            StartCoroutine(_ColorBlink(Color.green));
+        }
+        
+        
+        protected IEnumerator _ColorBlink(Color color)
         {
             float timer = 0f;
 
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
-            Color originalColor = sr.color;
-            sr.color = Color.red;
+            sr.color = color;
 
             while (timer < 0.1f)
             {
@@ -172,9 +181,13 @@
                 timer += Time.fixedDeltaTime;
             }
 
-            sr.color = originalColor;
+            sr.color = Color.white;
+
+            
 
         }
+
+
 
     }
 
