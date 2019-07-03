@@ -11,7 +11,9 @@
         [Header("Player Character")]
 
         [SerializeField]
-        protected float jumpStrenght = 6f;
+        protected float maxJumpStrenght = 6f;
+        [SerializeField]
+        protected float minJumpStrenght = 2f;
 
         [Range(0, .3f)]
         [SerializeField]
@@ -22,7 +24,13 @@
 
         private Vector2 direction;
 
-        private const float speedMultiplier = 100f;
+        private float timeSinceJumpPress = 0f;
+        private float currentJumpStrenght;
+
+        private int jumpDone = 0;
+
+
+        private const float speedMultiplier = 10f;
         private const float jumpForceMultiplier = 100f;
 
         protected override void Awake()
@@ -33,6 +41,7 @@
                 gunController = GetComponentInChildren<GunController>();
                 gunController.Player = this;
             }
+            currentJumpStrenght = minJumpStrenght;
             transform.rotation *= Quaternion.Euler(0, 180, 0);
             OnDeath += UIManager.Instance.OpenDeathPanel;
         }
@@ -40,17 +49,15 @@
         // Update is called once per frame
         void Update()
         {
-            direction = GetHorizontalDirectionFromAxis();
-            if (direction != Vector2.zero)
-            {
-                MoveHorizontallyToward(direction.x);
 
+            HorizontalMovement();
+
+            if (isOnGround && jumpDone >= 1)
+            {
+                jumpDone = 0;
             }
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
+            JumpMovement();
 
             if (Input.GetButtonDown("Fire2"))
             {
@@ -65,11 +72,56 @@
                 }
             }
 
+
             FacePos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
 
         }
 
+        private void HorizontalMovement()
+        {
 
+            direction = GetHorizontalDirectionFromAxis();
+            if (direction != Vector2.zero)
+            {
+                MoveHorizontallyToward(direction.x);
+
+            }
+            else
+            {
+                StopHorizontalMovement();
+            }
+        }
+
+        private void JumpMovement()
+        {
+            if (jumpDone >= 1) return;
+
+            float timeForFullJump = 0.08f;
+            if (Input.GetButtonDown("Jump"))
+            {
+                timeSinceJumpPress = 0f;
+                currentJumpStrenght = minJumpStrenght;
+            }
+            else if (Input.GetButton("Jump") && timeSinceJumpPress < timeForFullJump)
+            {
+                currentJumpStrenght = Mathf.Lerp(minJumpStrenght, maxJumpStrenght, timeSinceJumpPress / timeForFullJump);
+                timeSinceJumpPress += Time.deltaTime;
+            }
+            else if (Input.GetButtonUp("Jump") || timeSinceJumpPress > timeForFullJump)
+            {
+                if (timeSinceJumpPress > timeForFullJump)
+                {
+                    currentJumpStrenght = maxJumpStrenght;
+                }
+
+                Jump();
+                jumpDone++;
+                currentJumpStrenght = minJumpStrenght;
+                timeSinceJumpPress = timeForFullJump;
+
+            }
+        }
         protected void InteractWithNearInteractables()
         {
             Collider2D[] colls = new Collider2D[20];
@@ -88,17 +140,22 @@
         {
 
 
-            float movement = horizontalMovement * Time.fixedDeltaTime * speed * speedMultiplier;
+            float movement = horizontalMovement * Time.deltaTime * speed * speedMultiplier;
             Vector3 veloc = velocity;
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(movement, rb.velocity.y);
             // And then smoothing it out and applying it to the character
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref veloc, movementSmoothing);
+            //rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref veloc, movementSmoothing);
+            rb.velocity = targetVelocity;
+        }
+
+        private void StopHorizontalMovement() {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
         protected void Jump()
         {
-            rb.AddForce(Vector2.up * jumpStrenght * jumpForceMultiplier);
+            rb.AddForce(Vector2.up * currentJumpStrenght, ForceMode2D.Impulse);
         }
 
         private Vector2 GetDirectionFromAxis()

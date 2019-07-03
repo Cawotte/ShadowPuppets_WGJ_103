@@ -109,9 +109,9 @@ GameObject:
   - component: {fileID: 3614285339884473930}
   - component: {fileID: 3614285339884473928}
   - component: {fileID: 3614285339884473931}
-  - component: {fileID: 3614285339884473927}
   - component: {fileID: 3614285339884473926}
   - component: {fileID: 734703454}
+  - component: {fileID: 1337727196}
   m_Layer: 17
   m_Name: Character
   m_TagString: Player
@@ -240,25 +240,9 @@ MonoBehaviour:
   isOnGround: 0
   velocity: {x: 0, y: 0}
   observedSpeed: 0
-  jumpStrenght: 6.5
+  jumpStrenght: 16
   movementSmoothing: 0.13
   gunController: {fileID: 3614285341500256023}
---- !u!58 &3614285339884473927
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3614285339884473933}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 90ffb65d85b0c604198f29d6f2581c40, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.2}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &3614285339884473926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +275,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1337727196
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614285339884473933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.19}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.25}
+    oldSize: {x: 1.3333334, y: 1.3333334}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.95, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &3614285340471477763
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3614285341498321351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.55, y: 0.03, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 3614285341500256024}
