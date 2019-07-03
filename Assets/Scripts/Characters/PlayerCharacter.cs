@@ -38,7 +38,7 @@
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             direction = GetHorizontalDirectionFromAxis();
             if (direction != Vector2.zero)
