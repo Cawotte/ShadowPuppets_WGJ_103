@@ -16,6 +16,8 @@
         private Transform bulletsParent;
         [SerializeField]
         private Transform puppetsParent;
+        [SerializeField]
+        private Transform forbiddenSpawnParent;
 
         [SerializeField]
         private Camera mainCamera;
@@ -54,6 +56,7 @@
 
         private float timer = 0f;
         private Vector3 possiblePoint;
+        private List<Bounds> forbiddenArea;
         // Start is called before the first frame update
         void Start()
         {
@@ -65,6 +68,7 @@
             map = new Map(tilemap.layoutGrid, tilemap);
             pathfinder = new Pathfinder(map);
             possiblePoint = map.GetRandomSpawnPoint();
+            forbiddenArea = GetForbiddenArea();
         }
 
         // Update is called once per frame
@@ -122,7 +126,28 @@
         }
         private bool SpawnPointIsValid(Vector3 spawnSpoint)
         {
+            Vector2 spawn2 = spawnSpoint;
+            foreach (Bounds bound in forbiddenArea)
+            {
+                if (bound.Contains(spawn2))
+                {
+                    return false;
+                }
+            }
             return Vector3.Distance(spawnSpoint, player.transform.position) > 20f;
+        }
+
+        private List<Bounds> GetForbiddenArea()
+        {
+            List < Bounds > bounds = new List<Bounds>();
+            SpriteRenderer[] sprites = forbiddenSpawnParent.gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                bounds.Add(sprites[i].bounds);
+            }
+
+            return bounds;
         }
 
         private void OnDrawGizmos()

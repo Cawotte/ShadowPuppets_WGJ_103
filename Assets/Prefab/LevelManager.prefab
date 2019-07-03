@@ -91,6 +91,7 @@ Transform:
   m_Children:
   - {fileID: 6691542694486851641}
   - {fileID: 2039577378}
+  - {fileID: 2377542954634906686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,6 +111,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bulletsParent: {fileID: 6691542694486851641}
   puppetsParent: {fileID: 2039577378}
+  forbiddenSpawnParent: {fileID: 2377542954634906686}
   mainCamera: {fileID: 0}
   tilemap: {fileID: 0}
   originalPuppetPrefab: {fileID: 1768716204150387274, guid: b56531280bcceb042bacb175c426efd2,
@@ -130,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f15036a820dd498a260e9821dd123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableSpawner: 0
+  disableSpawner: 1
   timeBeforeNewSpawn: 30
   minimalSpawnTime: 5
   minimalPuppets: 4
@@ -145,3 +147,33 @@ MonoBehaviour:
   maxIncrement: 0
   timerMaxIncrement: 10
   timerMax: 0
+--- !u!1 &8718052347096719303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2377542954634906686}
+  m_Layer: 0
+  m_Name: Forbidden Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2377542954634906686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8718052347096719303}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6691542694988408638}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
