@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6691542694988408638}
   - component: {fileID: 6691542694988408637}
+  - component: {fileID: 861551259}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -114,3 +115,32 @@ MonoBehaviour:
   originalPuppetPrefab: {fileID: 1768716204150387274, guid: b56531280bcceb042bacb175c426efd2,
     type: 3}
   testMarker: {fileID: 0}
+  score: 0
+  currentPuppets: 0
+--- !u!114 &861551259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6691542694988408636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37f15036a820dd498a260e9821dd123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableSpawner: 0
+  timeBeforeNewSpawn: 30
+  minimalSpawnTime: 5
+  minimalPuppets: 4
+  maxPuppets: 100
+  timerNewSpawn: 0
+  passiveDecrement: 0
+  timeDecreaseSpawnTime: 10
+  timerDecrease: 0
+  minimalIncrement: 0
+  timerMinimalIncrement: 10
+  timerMin: 0
+  maxIncrement: 0
+  timerMaxIncrement: 10
+  timerMax: 0

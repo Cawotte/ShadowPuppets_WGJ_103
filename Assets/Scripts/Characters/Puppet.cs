@@ -147,20 +147,7 @@
         {
             if (!isMoving) return;
 
-            FacePos(LevelManager.Instance.Player.transform.position);
-            /*
-            Vector3 direction = LevelManager.Instance.Player.transform.position - transform.position;
-
-            if (direction.x < 0 && isFacingRight)
-            {
-                GetComponent<SpriteRenderer>().flipX = true;
-                isFacingRight = false;
-            }
-            else if (direction.x > 0 && !isFacingRight)
-            {
-                GetComponent<SpriteRenderer>().flipX = false;
-                isFacingRight = true;
-            }*/
+            FacePos(LevelManager.Instance.GetTarget().position);
         }
         private bool IsVeryCloseTo(Vector3 worldPos)
         {

@@ -75,6 +75,17 @@
             timer += Time.deltaTime;
         }
 
+        public Transform GetTarget()
+        {
+            if (player == null)
+            {
+                return testMarker.transform;
+            }
+            else
+            {
+                return player.transform;
+            }
+        }
         public void SpawnNewPuppet()
         {
             SpawnPuppetAt(PickValidSpawnPoint());

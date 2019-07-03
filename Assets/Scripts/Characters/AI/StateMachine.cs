@@ -9,10 +9,10 @@
 
         private State currentState;
         private Puppet puppet;
-        private PlayerCharacter player;
+        private Transform target;
 
         public StateMachine(State startingState, Puppet puppet) {
-            this.player = LevelManager.Instance.Player;
+            this.target = LevelManager.Instance.GetTarget();
             this.puppet = puppet;
             this.CurrentState = startingState;
         }
@@ -29,7 +29,6 @@
         }
 
         public Puppet Puppet { get => puppet;  }
-        public PlayerCharacter Player { get => player; }
 
         public void Update()
         {
@@ -38,7 +37,7 @@
 
         public float DistanceWithPlayer()
         {
-            return Vector3.Distance(puppet.transform.position, player.transform.position);
+            return Vector3.Distance(puppet.transform.position, target.transform.position);
         }
     }
 
