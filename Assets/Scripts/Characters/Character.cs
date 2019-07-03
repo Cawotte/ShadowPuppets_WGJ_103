@@ -27,15 +27,13 @@
         [SerializeField]
         [ReadOnly]
         protected bool isMoving = false;
-        [SerializeField]
-        [ReadOnly]
-        protected bool isOnGround = false;
 
         //Events
         public Action<int> OnDamageTaken = null;
         public Action<int> OnHeal = null;
         public Action<int> OnLifeChange = null;
         public Action OnDeath = null;
+
 
 
         [Header("Debug Infos")]
@@ -91,7 +89,6 @@
         {
             //observe if moving.
             isMoving = (rb.velocity != Vector2.zero);
-            isOnGround = rb.velocity.y == 0;
 
             velocity = rb.velocity;
             observedSpeed = rb.velocity.magnitude;

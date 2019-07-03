@@ -21,6 +21,8 @@
 
         [SerializeField]
         private GunController gunController;
+        [SerializeField]
+        private FootCollider foot;
 
         private Vector2 direction;
 
@@ -29,6 +31,12 @@
 
         private int jumpDone = 0;
 
+        private float timerSlowDown = 0f;
+
+        private bool IsOnGround
+        {
+            get => foot.IsOnGround && rb.velocity.y == 0;
+        }
 
         private const float speedMultiplier = 10f;
         private const float jumpForceMultiplier = 100f;
@@ -52,7 +60,7 @@
 
             HorizontalMovement();
 
-            if (isOnGround && jumpDone >= 1)
+            if (IsOnGround && jumpDone >= 1)
             {
                 jumpDone = 0;
             }
@@ -64,7 +72,7 @@
                 InteractWithNearInteractables();
             }
 
-            if (isMoving && isOnGround)
+            if (isMoving && IsOnGround)
             {
                 if (!soundPlayer.IsCurrentlyPlayed("footstep"))
                 {
@@ -85,11 +93,25 @@
             if (direction != Vector2.zero)
             {
                 MoveHorizontallyToward(direction.x);
+                timerSlowDown = 0f;
 
             }
             else
             {
-                StopHorizontalMovement();
+                if (rb.velocity.x != 0f)
+                {
+                    float timeToSlow = 0.05f;
+                    if (timerSlowDown > timeToSlow) timerSlowDown = timeToSlow;
+                    float pseudoInertia = Mathf.Lerp(rb.velocity.x, 0f, timerSlowDown / timeToSlow);
+                    rb.velocity = new Vector2(
+                        pseudoInertia,
+                        rb.velocity.y);
+                    timerSlowDown += Time.deltaTime;
+                }
+                else
+                {
+                    StopHorizontalMovement();
+                }
             }
         }
 
@@ -155,6 +177,7 @@
 
         protected void Jump()
         {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * currentJumpStrenght, ForceMode2D.Impulse);
         }
 
