@@ -18,7 +18,7 @@
         private int currentLife;
 
         [SerializeField]
-        protected float speed = 2.5f;
+        protected float speed = 12.5f;
 
         [Header("Status")]
 

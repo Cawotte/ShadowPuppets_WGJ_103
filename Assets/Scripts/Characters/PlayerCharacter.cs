@@ -14,10 +14,7 @@
         protected float maxJumpStrenght = 6f;
         [SerializeField]
         protected float minJumpStrenght = 2f;
-
-        [Range(0, .3f)]
-        [SerializeField]
-        private float movementSmoothing = .13f; // How much to smooth out the movement
+        
 
         [SerializeField]
         private GunController gunController;
@@ -52,6 +49,10 @@
             currentJumpStrenght = minJumpStrenght;
             transform.rotation *= Quaternion.Euler(0, 180, 0);
             OnDeath += UIManager.Instance.OpenDeathPanel;
+
+            rb.velocity = Vector2.zero;
+            timerSlowDown = 0.05f;
+            speed = 12.3f;
         }
 
         // Update is called once per frame
