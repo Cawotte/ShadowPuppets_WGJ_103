@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859023311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.023, y: -0.251, z: 0}
-  m_LocalScale: {x: 0.79526985, y: 0.11732857, z: 1}
+  m_LocalPosition: {x: 0.0021, y: -0.179, z: 0}
+  m_LocalScale: {x: 0.6372794, y: 0.11732857, z: 1}
   m_Children: []
   m_Father: {fileID: 3614285339884473932}
   m_RootOrder: 2
@@ -407,7 +407,6 @@ MonoBehaviour:
   observedSpeed: 0
   maxJumpStrenght: 20
   minJumpStrenght: 16.5
-  movementSmoothing: 0.13
   gunController: {fileID: 3614285341500256023}
   foot: {fileID: 859023313}
 --- !u!114 &3614285339884473926

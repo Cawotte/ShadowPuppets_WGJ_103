@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2831333098522033022, guid: bcede87ee3c0e7345a942dbf06f840ef,
         type: 3}
       propertyPath: m_Name
-      value: Strong Trigger Light Variant
+      value: Strong Trigger Light Variant Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5815487137094539737, guid: bcede87ee3c0e7345a942dbf06f840ef,
         type: 3}
@@ -77,26 +77,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.07
-      objectReference: {fileID: 0}
     - target: {fileID: 7480656326601142050, guid: bcede87ee3c0e7345a942dbf06f840ef,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -117,11 +97,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 5.9766073
       objectReference: {fileID: 0}
+    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730782519738530049, guid: bcede87ee3c0e7345a942dbf06f840ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 2730782519738530052, guid: bcede87ee3c0e7345a942dbf06f840ef,
         type: 3}
       propertyPath: Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cffb8f052040d0e42a0f40f76ed189ee,
+      objectReference: {fileID: 21300000, guid: f10edde00fb4c64429d3f0b5a4035dca,
         type: 3}
     - target: {fileID: 2730782519738530052, guid: bcede87ee3c0e7345a942dbf06f840ef,
         type: 3}

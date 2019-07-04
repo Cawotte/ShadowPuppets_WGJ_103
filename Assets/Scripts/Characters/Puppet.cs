@@ -61,7 +61,7 @@
             animator.SetBool("isMoving", isMoving);
 
             //Sound
-            if (isMoving && !soundPlayer.IsCurrentlyPlayed("puppetClink")) {
+            if (isMoving && !soundPlayer.IsCurrentlyPlayed("puppetClink") && !(this is LightPuppet)) {
                 soundPlayer.PlayRandomFromList("puppetClink");
             }
         }

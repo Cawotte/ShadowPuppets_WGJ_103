@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 941263301339541215, guid: 378bfb65d83f39048a7129c57f9c69f4,
         type: 3}
       propertyPath: m_Name
-      value: Strong Light
+      value: Strong Light Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8858054018872495224, guid: 378bfb65d83f39048a7129c57f9c69f4,
         type: 3}
@@ -67,6 +67,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1134717664914975910, guid: 378bfb65d83f39048a7129c57f9c69f4,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1134717664914975911, guid: 378bfb65d83f39048a7129c57f9c69f4,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1134717664914975904, guid: 378bfb65d83f39048a7129c57f9c69f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -91,7 +101,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cffb8f052040d0e42a0f40f76ed189ee,
+      objectReference: {fileID: 21300000, guid: f10edde00fb4c64429d3f0b5a4035dca,
         type: 3}
     - target: {fileID: 1134717664914975909, guid: 378bfb65d83f39048a7129c57f9c69f4,
         type: 3}
