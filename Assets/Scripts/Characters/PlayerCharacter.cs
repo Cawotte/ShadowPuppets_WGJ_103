@@ -64,6 +64,8 @@
         void Update()
         {
 
+            if (UIManager.Instance.PauseIsEnabled) return;
+
             HorizontalMovement();
 
             if (IsOnGround && jumpDone >= 1)

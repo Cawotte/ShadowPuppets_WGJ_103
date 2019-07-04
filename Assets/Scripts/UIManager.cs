@@ -40,6 +40,8 @@
 
         private bool pauseIsEnabled = false;
 
+        public bool PauseIsEnabled { get => pauseIsEnabled; set => pauseIsEnabled = value; }
+
         private void Start()
         {
             mainMenuCanvas.SetActive(showMainMenuCanvasOnStart);
