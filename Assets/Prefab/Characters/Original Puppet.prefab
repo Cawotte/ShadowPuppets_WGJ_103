@@ -136,15 +136,14 @@ MonoBehaviour:
   speed: 2.5
   isInvincible: 0
   isMoving: 0
-  isOnGround: 0
   velocity: {x: 0, y: 0}
   observedSpeed: 0
   isPathing: 0
   closeRangeValue: 0.4
   amplitude: 1.5
   frequency: 8
-  idleAmplitude: 1
-  idleFrequency: 3
+  idleAmplitude: 3
+  idleFrequency: 2.2
   shadowPuppetPrefab: {fileID: 3029433923112876393, guid: cf2630a48530d6243a56dd915a6ae013,
     type: 3}
 --- !u!61 &1768716204150387272

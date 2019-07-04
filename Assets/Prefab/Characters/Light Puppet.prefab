@@ -301,16 +301,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalLife: 1
   currentLife: 0
-  speed: 2.5
+  speed: 3.2
   isInvincible: 0
   isMoving: 0
-  isOnGround: 0
   velocity: {x: 0, y: 0}
   observedSpeed: 0
   isPathing: 0
   closeRangeValue: 0.3
   amplitude: 1
   frequency: 0.3
-  idleAmplitude: 1
+  idleAmplitude: 3
   idleFrequency: 3
   healAmount: 2

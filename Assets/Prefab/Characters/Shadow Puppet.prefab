@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalLife: 1
   currentLife: 0
-  speed: 2.5
+  speed: 1.6
   isInvincible: 0
   isMoving: 0
   velocity: {x: 0, y: 0}

@@ -9,11 +9,12 @@
     public class Pathfinder
     {
         private Map mapGrid;
-        
 
+        private System.Random rand;
         public Pathfinder(Map mapGrid)
         {
             this.mapGrid = mapGrid;
+            rand = new System.Random();
         }
 
         public TilePath GetPath(Vector3 startWorldPos, Vector3 goalWorldPos)
@@ -57,7 +58,7 @@
             openSet.Add(start);
 
             //FLOOD STOP
-            int MAX_ITER = 1000;
+            int MAX_ITER = 10000;
             int nbIter = 0;
             while (openSet.Count > 0 && nbIter < MAX_ITER)
             {
@@ -133,7 +134,9 @@
                 Vector2Int.down + Vector2Int.right,
                 Vector2Int.down + Vector2Int.left,
             };
-            
+
+            directions.OrderBy(x => rand.Next()).ToArray();
+
             for (int i = 0; i < directions.Length; i++)
             {
                 neighbor = cellPos + directions[i];

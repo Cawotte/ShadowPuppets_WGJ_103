@@ -103,7 +103,9 @@
             }
             else
             {
-                
+
+                StopHorizontalMovement();
+                /*
                 if (rb.velocity.x != 0f)
                 {
                     float timeToSlow = 0.05f;
@@ -117,7 +119,7 @@
                 else
                 {
                     StopHorizontalMovement();
-                }
+                }*/
             }
         }
 

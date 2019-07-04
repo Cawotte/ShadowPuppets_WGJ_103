@@ -25,7 +25,7 @@
         private void Start()
         {
             OnDeath += LevelManager.Instance.Player.PlayGhostDeathSound;
-            stateMachine = new StateMachine(new StatePursuit(), this);
+            stateMachine = new StateMachine(new StateIdleFloat(), this);
             StartCoroutine(_LateLight());
         }
 

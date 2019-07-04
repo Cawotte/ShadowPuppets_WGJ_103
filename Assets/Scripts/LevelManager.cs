@@ -134,7 +134,7 @@
                     return false;
                 }
             }
-            return Vector3.Distance(spawnSpoint, player.transform.position) > 20f;
+            return Vector2.Distance(spawnSpoint, player.transform.position) > 11f;
         }
 
         private List<Bounds> GetForbiddenArea()
