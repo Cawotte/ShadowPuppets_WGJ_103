@@ -182,7 +182,7 @@
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             sr.color = color;
 
-            while (timer < 0.1f)
+            while (timer < 0.2f)
             {
                 yield return null;
                 timer += Time.fixedDeltaTime;

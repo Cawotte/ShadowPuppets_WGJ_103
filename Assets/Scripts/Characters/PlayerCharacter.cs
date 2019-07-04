@@ -101,31 +101,14 @@
         {
 
             direction = GetHorizontalDirectionFromAxis();
-            if (direction != Vector2.zero)
+            if (direction.x != 0f)
             {
                 MoveHorizontallyToward(direction.x);
-                timerSlowDown = 0f;
 
             }
             else
             {
-
                 StopHorizontalMovement();
-                /*
-                if (rb.velocity.x != 0f)
-                {
-                    float timeToSlow = 0.05f;
-                    if (timerSlowDown > timeToSlow) timerSlowDown = timeToSlow;
-                    float pseudoInertia = Mathf.Lerp(rb.velocity.x, 0f, timerSlowDown / timeToSlow);
-                    rb.velocity = new Vector2(
-                        pseudoInertia,
-                        rb.velocity.y);
-                    timerSlowDown += Time.deltaTime;
-                }
-                else
-                {
-                    StopHorizontalMovement();
-                }*/
             }
         }
 

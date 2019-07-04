@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainLevel.unity
     guid: 52da528878ecafa40882c46bdb56bddc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SwitchTest.unity
     guid: 47530e625a5376249a377a631272a57a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CombatTest.unity
     guid: 836e9c2c34e6087488b3f3478b461a05
   m_configObjects: {}

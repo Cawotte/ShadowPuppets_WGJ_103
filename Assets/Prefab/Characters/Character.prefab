@@ -789,7 +789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  gunCooldown: 0.3
+  gunCooldown: 0.6
   flashShotDuration: 0.075
   flashShot: {fileID: 3614285341498321348}
   bulletPrefab: {fileID: 8882372901768713047, guid: 592fff52d9ad2ac478c9db0fdb479e1f,

@@ -11,7 +11,7 @@
 
         [SerializeField]
         [Range(0.1f, 1.5f)]
-        private float gunCooldown = 0.3f;
+        private float gunCooldown = 1f;
 
         [SerializeField]
         private float flashShotDuration = 0.075f;
@@ -63,7 +63,7 @@
         }
         private void Fire()
         {
-            Player.SoundPlayer.PlaySound("pistolShot");
+            Player.SoundPlayer.PlayRandomFromList("pistolShot");
             SpawnBullet();
             StartCoroutine(_FlashShot());
             StartCoroutine(_ShotCooldown());
