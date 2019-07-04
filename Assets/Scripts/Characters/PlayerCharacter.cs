@@ -49,10 +49,16 @@
             currentJumpStrenght = minJumpStrenght;
             transform.rotation *= Quaternion.Euler(0, 180, 0);
             OnDeath += UIManager.Instance.OpenDeathPanel;
+            OnLifeChange += UIManager.Instance.SetPlayerLife;
 
             
         }
-        
+
+        protected void Start()
+        {
+            UIManager.Instance.SetPlayerLife(CurrentLife);
+        }
+
 
         // Update is called once per frame
         void Update()

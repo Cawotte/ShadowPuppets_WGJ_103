@@ -32,6 +32,12 @@
         private TextMeshProUGUI textDeath;
 
 
+        [SerializeField]
+        private GameObject playerLifeGameobject;
+        [SerializeField]
+        private TextMeshProUGUI playerLife;
+
+
         private bool pauseIsEnabled = false;
 
         private void Start()
@@ -41,6 +47,8 @@
             pauseCanvas.SetActive(false);
             luminositySlider.value = LuminosityManager.Instance.Luminosity;
             ambientLight.SetLuminosity(LuminosityManager.Instance.Luminosity);
+            
+            playerLifeGameobject.SetActive(LevelManager.Instance.Player != null);
         }
 
         private void Update()
@@ -51,6 +59,15 @@
             }
         }
 
+        public void SetPlayerLife(int life)
+        {
+            string lifestr = "";
+            for (int i = 0; i < life; i++)
+            {
+                lifestr += "I";
+            }
+            playerLife.text = lifestr;
+        }
         public void SetLuminosity(float alpha)
         {
             LuminosityManager.Instance.Luminosity = alpha;
