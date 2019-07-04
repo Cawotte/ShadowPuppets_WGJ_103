@@ -83,6 +83,15 @@
             {
                 soundPlayer = gameObject.AddComponent<AudioSourcePlayer>();
             }
+
+
+        }
+
+        private void Start()
+        {
+
+
+            UnityEditor.Selection.activeGameObject = gameObject;
         }
 
         protected virtual void LateUpdate()

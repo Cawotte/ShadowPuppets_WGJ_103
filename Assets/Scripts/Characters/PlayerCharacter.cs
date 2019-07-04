@@ -35,7 +35,7 @@
             get => foot.IsOnGround && rb.velocity.y == 0;
         }
 
-        private const float speedMultiplier = 10f;
+        private float speedMultiplier = 20f;
         private const float jumpForceMultiplier = 100f;
 
         protected override void Awake()
@@ -50,9 +50,9 @@
             transform.rotation *= Quaternion.Euler(0, 180, 0);
             OnDeath += UIManager.Instance.OpenDeathPanel;
 
-
-            StartCoroutine(_ResetVelocity());
+            
         }
+        
 
         // Update is called once per frame
         void Update()
@@ -85,20 +85,7 @@
 
 
         }
-
-        private IEnumerator _ResetVelocity()
-        {
-
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
-
-            gameObject.SetActive(false);
-            gameObject.SetActive(true);
-        }
-
+        
         private void HorizontalMovement()
         {
 
@@ -111,6 +98,7 @@
             }
             else
             {
+                
                 if (rb.velocity.x != 0f)
                 {
                     float timeToSlow = 0.05f;
