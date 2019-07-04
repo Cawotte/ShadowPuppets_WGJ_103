@@ -87,12 +87,6 @@
 
         }
 
-        private void Start()
-        {
-
-
-            UnityEditor.Selection.activeGameObject = gameObject;
-        }
 
         protected virtual void LateUpdate()
         {

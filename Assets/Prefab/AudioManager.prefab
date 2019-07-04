@@ -287,9 +287,9 @@ MonoBehaviour:
       maxDistance: 500
       source: {fileID: 0}
       ListName: 
-  musics:
-  - name: MusicMenu
-    clip: {fileID: 8300000, guid: fc31283129db90646a83712a78f263c9, type: 3}
+  music:
+    name: MusicMenu
+    clip: {fileID: 8300000, guid: 17d32dcef481ff9498933336bd4bee6e, type: 3}
     volume: 1
     pitch: 1
     loop: 1
@@ -297,10 +297,10 @@ MonoBehaviour:
     maxDistance: 500
     source: {fileID: 0}
     ListName: 
-  music:
-    name: MusicMenu
-    clip: {fileID: 8300000, guid: fc31283129db90646a83712a78f263c9, type: 3}
-    volume: 1
+  ambientSound:
+    name: Ambient
+    clip: {fileID: 8300000, guid: c04423556b56c244f8fd64e982421961, type: 3}
+    volume: 0.8
     pitch: 1
     loop: 1
     minDistance: 0

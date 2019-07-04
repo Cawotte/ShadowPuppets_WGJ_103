@@ -18,11 +18,11 @@
 
         [SerializeField]
         private SoundList[] soundLists;
-
-        //Musics
-        public Sound[] musics;
-        int num_music = 0;
+        
         public Sound music;
+
+
+        public Sound ambientSound;
 
         public Sound[] Sounds { get => sounds; set => sounds = value; }
         public SoundList[] SoundLists { get => soundLists; set => soundLists = value; }
@@ -41,9 +41,18 @@
             //num_music = UnityEngine.Random.Range(0, musics.Length);
 
             //We initialize the music the same way than for the sound, but just once this time.
-            music.source = gameObject.AddComponent<AudioSource>();
-            LoadMusic(musics[num_music]);
+            if (music != null)
+            {
+                music.source = gameObject.AddComponent<AudioSource>();
+                LoadMusic(music);
+            }
+            if (ambientSound != null)
+            {
+                ambientSound.source = gameObject.AddComponent<AudioSource>();
+                LoadAmbient(ambientSound);
+            }
             music.source.Play();
+            ambientSound.source.Play();
 
         }
 
@@ -53,7 +62,14 @@
             LoadSound(music.source, mus);
 
         }
-        public static void LoadSound(AudioSource source, Sound sound)
+
+
+        public void LoadAmbient(Sound mus)
+        {
+            LoadSound(ambientSound.source, mus);
+        }
+
+            public static void LoadSound(AudioSource source, Sound sound)
         {
             source.clip = sound.clip;
             source.volume = sound.Volume;
@@ -118,20 +134,7 @@
                 s.source.UnPause();
             music.source.UnPause();
         }
-
-        //Change the music for the next one in the array musics[]
-        public void nextMusic()
-        {
-            if (musics.Length - 1 > num_music)
-                num_music++;
-            else
-                num_music = 0;
-
-            music.source.Stop(); //We stop the previous one.
-                                 //We replace it with the new one.
-            LoadMusic(musics[num_music]);
-            music.source.Play();
-        }
+        
 
     }
 }
