@@ -85,6 +85,11 @@
 
 
         }
+
+        public void PlayGhostDeathSound()
+        {
+            soundPlayer.PlayRandomFromList("puppetWhiff");
+        }
         
         private void HorizontalMovement()
         {

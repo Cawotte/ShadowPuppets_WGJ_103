@@ -105,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1.3, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &3029433922220143493
 MonoBehaviour:
@@ -283,7 +283,6 @@ MonoBehaviour:
   speed: 2.5
   isInvincible: 0
   isMoving: 0
-  isOnGround: 0
   velocity: {x: 0, y: 0}
   observedSpeed: 0
   isPathing: 0
@@ -294,6 +293,8 @@ MonoBehaviour:
   idleFrequency: 3
   contactDamage: 1
   lightPuppetPrefab: {fileID: 5349226667301639351, guid: d03d3775c5904914d84bb7599d5d310b,
+    type: 3}
+  lifeforcePrefab: {fileID: 450737428109035527, guid: b7af8b75d5d99234ebaff687ddb78756,
     type: 3}
 --- !u!50 &3029433923112876394
 Rigidbody2D:

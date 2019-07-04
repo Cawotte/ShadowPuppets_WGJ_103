@@ -18,11 +18,13 @@
             base.Awake();
             puppetColl = GetComponentInChildren<PuppetCollider>();
             puppetColl.OnPlayerContact += (player) => player.Heal(healAmount);
-            puppetColl.OnPlayerContact += (player) => Destroy(gameObject); //self destruct on heal
+            puppetColl.OnPlayerContact += (player) => DealDamage(TotalLife); //self destruct on heal
+
         }
 
         private void Start()
         {
+            OnDeath += LevelManager.Instance.Player.PlayGhostDeathSound;
             stateMachine = new StateMachine(new StatePursuit(), this);
             StartCoroutine(_LateLight());
         }

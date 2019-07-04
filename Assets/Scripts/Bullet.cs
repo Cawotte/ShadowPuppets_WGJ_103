@@ -50,6 +50,12 @@
             {
                 return;
             }
+
+            //Ignore contact, but contact does not ignore bullet.
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Contact"))
+            {
+                return;
+            }
             
             if (character != null)
             {

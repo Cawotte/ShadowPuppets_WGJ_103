@@ -39,6 +39,7 @@
             shadowPuppet.transform.position = transform.position;
             shadowPuppet.transform.rotation = transform.rotation;
             shadowPuppet.transform.localScale = transform.localScale;
+            shadowPuppet.OriginalPuppet = this;
             //shadowPuppet.transform.position += Vector3.right * 3f;
 
             shadowPuppet.gameObject.SetActive(true);

@@ -16,15 +16,7 @@
             set
             {
                 luminosity = value;
-                OnLuminosityChange?.Invoke(value);
             }
-        }
-
-        public Action<float> OnLuminosityChange = null;
-
-        private void Awake()
-        {
-            OnLuminosityChange = null;
         }
     }
 

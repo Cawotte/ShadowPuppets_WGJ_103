@@ -13,9 +13,15 @@
         private int contactDamage = 1;
         [SerializeField]
         GameObject lightPuppetPrefab;
+        [SerializeField]
+        GameObject lifeforcePrefab;
+
         
         PuppetCollider puppetColl;
-        
+
+        private OriginalPuppet originalPuppet;
+
+        public OriginalPuppet OriginalPuppet { get => originalPuppet; set => originalPuppet = value; }
 
         protected override void Awake()
         {
@@ -28,6 +34,8 @@
 
         private void Start()
         {
+            if (LevelManager.Instance.Player != null)
+                OnDeath += LevelManager.Instance.Player.PlayGhostDeathSound;
             stateMachine = new StateMachine(new StatePursuit(), this);
         }
 
@@ -40,6 +48,24 @@
             lightPuppet.transform.localScale = transform.localScale;
 
             lightPuppet.gameObject.SetActive(true);
+        }
+
+
+        public void OnShadowContact()
+        {
+            soundPlayer.PlayRandomFromList("puppetWhiff");
+            InstantiateLifeforce();
+
+        }
+
+        private void InstantiateLifeforce()
+        {
+            LifeForce lifeforce = Instantiate(lifeforcePrefab, transform.position, transform.rotation).GetComponent < LifeForce>(); ;
+
+            lifeforce.Origin = transform;
+            lifeforce.Target = originalPuppet.transform;
+
+            lifeforce.gameObject.SetActive(true);
         }
     }
 }

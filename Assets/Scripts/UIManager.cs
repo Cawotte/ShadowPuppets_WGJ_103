@@ -22,6 +22,8 @@
 
         [SerializeField]
         private Slider luminositySlider;
+        [SerializeField]
+        private AmbientLight ambientLight;
 
 
         [SerializeField]
@@ -38,6 +40,7 @@
             deathCanvas.SetActive(false);
             pauseCanvas.SetActive(false);
             luminositySlider.value = LuminosityManager.Instance.Luminosity;
+            ambientLight.SetLuminosity(LuminosityManager.Instance.Luminosity);
         }
 
         private void Update()
@@ -51,6 +54,8 @@
         public void SetLuminosity(float alpha)
         {
             LuminosityManager.Instance.Luminosity = alpha;
+            ambientLight.SetLuminosity(alpha);
+            luminositySlider.value = alpha;
         }
 
         public void OpenDeathPanel()
