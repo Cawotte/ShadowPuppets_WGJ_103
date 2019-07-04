@@ -5,6 +5,7 @@
     using TMPro;
     using UnityEngine;
     using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
 
     public class UIManager : Singleton<UIManager>
     {
@@ -20,6 +21,10 @@
 
 
         [SerializeField]
+        private Slider luminositySlider;
+
+
+        [SerializeField]
         private GameObject deathCanvas;
         [SerializeField]
         private TextMeshProUGUI textDeath;
@@ -32,6 +37,7 @@
             mainMenuCanvas.SetActive(showMainMenuCanvasOnStart);
             deathCanvas.SetActive(false);
             pauseCanvas.SetActive(false);
+            luminositySlider.value = LuminosityManager.Instance.Luminosity;
         }
 
         private void Update()
@@ -40,6 +46,11 @@
             {
                 PauseTheGame(!pauseIsEnabled);
             }
+        }
+
+        public void SetLuminosity(float alpha)
+        {
+            LuminosityManager.Instance.Luminosity = alpha;
         }
 
         public void OpenDeathPanel()
