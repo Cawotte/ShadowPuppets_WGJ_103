@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1288247001815704571}
   - component: {fileID: 1288247001815704570}
+  - component: {fileID: 8756831543288493935}
   m_Layer: 0
-  m_Name: Listener
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +40,282 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288247001815704572}
   m_Enabled: 1
+--- !u!114 &8756831543288493935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288247001815704572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca68551a3b4ef5459ea45b41e9fdbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 0
+  sounds:
+  - name: pistolShot
+    clip: {fileID: 8300000, guid: 7d79a308708fba248a15b838f5552b1e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    minDistance: 0
+    maxDistance: 500
+    source: {fileID: 0}
+    ListName: 
+  soundLists:
+  - listName: pistolShot
+    sounds:
+    - name: pistolShot1
+      clip: {fileID: 8300000, guid: 7d79a308708fba248a15b838f5552b1e, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: pistolShot2
+      clip: {fileID: 8300000, guid: 21753e2da7d18c14d91c950633b6385a, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+  - listName: footstep
+    sounds:
+    - name: footstep1
+      clip: {fileID: 8300000, guid: 83d1090ca8cc3584eac50cc14623d9f2, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: footstep2
+      clip: {fileID: 8300000, guid: eb82339f349ef3046be7946440a5840e, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: footstep3
+      clip: {fileID: 8300000, guid: b7535efeaef7784489ac35c80b7c7d3f, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: footstep4
+      clip: {fileID: 8300000, guid: 0f5a4452cc4d9624c977c964a3c41455, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: footstep5
+      clip: {fileID: 8300000, guid: 8edceff3b47072d47a33955ed11e8917, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: footstep6
+      clip: {fileID: 8300000, guid: 483a4817618e7544b9cd7703cf1cca01, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+  - listName: puppetClink
+    sounds:
+    - name: puppetClink1
+      clip: {fileID: 8300000, guid: 4716544bc00b6374ebac16ffb732b368, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 1
+      maxDistance: 15
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetClink2
+      clip: {fileID: 8300000, guid: 1f2e4a8ac1efb754786361ca2f0419ae, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 1
+      maxDistance: 15
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetClink3
+      clip: {fileID: 8300000, guid: 54a0154f28beec14fa3bf753e3a96237, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 1
+      maxDistance: 15
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetClink4
+      clip: {fileID: 8300000, guid: 8e35352d48fbab44484af590bda481f4, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 1
+      maxDistance: 15
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetClink5
+      clip: {fileID: 8300000, guid: 786f5cc222e5c794da00d273afad8520, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 1
+      maxDistance: 15
+      source: {fileID: 0}
+      ListName: 
+  - listName: puppetDamaged
+    sounds:
+    - name: puppetDamaged1
+      clip: {fileID: 8300000, guid: 7919d72bc3b0f1540a83f9acf4a51fcd, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetDamaged2
+      clip: {fileID: 8300000, guid: 93a6999fb96590f439b335370e302508, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+  - listName: puppetWhiff
+    sounds:
+    - name: puppetWhiff1
+      clip: {fileID: 8300000, guid: 45e9072f55a274040991f223281dddbf, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 10
+      source: {fileID: 0}
+      ListName: 
+    - name: puppetWhiff2
+      clip: {fileID: 8300000, guid: bbdfdbd14d130ac4e9143c2c729601b3, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 10
+      source: {fileID: 0}
+      ListName: 
+  - listName: lightBoot
+    sounds:
+    - name: lightBoot1
+      clip: {fileID: 8300000, guid: 866d0f8e3a4398641954b1d321e7d3f7, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: lightBoot2
+      clip: {fileID: 8300000, guid: d7ae82c8e7c27814b86f36b4850b1678, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+  - listName: lightLoop
+    sounds:
+    - name: lightLoop1
+      clip: {fileID: 8300000, guid: cfe8f6a34087f23408fde99cb530b481, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 1
+      minDistance: 0
+      maxDistance: 6
+      source: {fileID: 0}
+      ListName: 
+    - name: lightLoop2
+      clip: {fileID: 8300000, guid: 326825379221b394b84dab1ca6ea3f98, type: 3}
+      volume: 0.3
+      pitch: 1
+      loop: 1
+      minDistance: 0
+      maxDistance: 6
+      source: {fileID: 0}
+      ListName: 
+  - listName: switch
+    sounds:
+    - name: switch1
+      clip: {fileID: 8300000, guid: 1faf6d621eee7c54aaf1748eec7c54c9, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: switch2
+      clip: {fileID: 8300000, guid: ea03961b2fa29934b89559a61ae82b86, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+    - name: switch3
+      clip: {fileID: 8300000, guid: d66326072fdff584e8eaf0c0c6662c12, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      minDistance: 0
+      maxDistance: 500
+      source: {fileID: 0}
+      ListName: 
+  music:
+    name: MusicMenu
+    clip: {fileID: 8300000, guid: 17d32dcef481ff9498933336bd4bee6e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    minDistance: 0
+    maxDistance: 500
+    source: {fileID: 0}
+    ListName: 
+  ambientSound:
+    name: Ambient
+    clip: {fileID: 8300000, guid: c04423556b56c244f8fd64e982421961, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    minDistance: 0
+    maxDistance: 500
+    source: {fileID: 0}
+    ListName: 
 --- !u!1 &1288247002054272987
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +434,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
