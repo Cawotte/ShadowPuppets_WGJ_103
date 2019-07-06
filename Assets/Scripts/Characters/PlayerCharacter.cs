@@ -27,15 +27,13 @@
         private float currentJumpStrenght;
 
         private int jumpDone = 0;
-
-        private float timerSlowDown = 0f;
-
+        
+        private float horizontalInput;
         private bool IsOnGround
         {
             get => foot.IsOnGround && rb.velocity.y == 0;
         }
-
-        private float speedMultiplier = 20f;
+        
         private const float jumpForceMultiplier = 100f;
 
         protected override void Awake()
@@ -102,10 +100,10 @@
         private void HorizontalMovement()
         {
 
-            direction = GetHorizontalDirectionFromAxis();
-            if (direction.x != 0f)
+            horizontalInput = GetHorizontalDirectionFromAxis();
+            if (Mathf.Abs(horizontalInput) > 0.1f)
             {
-                MoveHorizontallyToward(direction.x);
+                MoveHorizontallyToward(horizontalInput);
 
             }
             else
@@ -161,7 +159,7 @@
         {
 
 
-            float movement = horizontalMovement * Time.deltaTime * speed * speedMultiplier;
+            float movement = horizontalMovement * Time.deltaTime * speed * 20f;
             Vector3 veloc = velocity;
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(movement, rb.velocity.y);
@@ -185,9 +183,9 @@
             return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
         }
 
-        private Vector2 GetHorizontalDirectionFromAxis()
+        private float GetHorizontalDirectionFromAxis()
         {
-            return new Vector2(Input.GetAxis("Horizontal"), 0).normalized;
+            return Input.GetAxis("Horizontal");
         }
 
         
