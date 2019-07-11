@@ -1,15 +1,17 @@
 ﻿namespace WGJ.PuppetShadow
 {
-
-    using UnityEngine.Audio;
+    
     using UnityEngine;
-
-
+    
     /*
      * Class used to define a sound, any playable sound clips.
      * The audio manager contains an Array of 'Sound' which will all contain a sound.
      * */
 
+    /// <summary>
+    /// Class encapsulating a playable sound, 
+    /// that must be registered in the AudioManager or a SoundList from the AudioManager.
+    /// </summary>
     [System.Serializable]
     public class Sound
     {

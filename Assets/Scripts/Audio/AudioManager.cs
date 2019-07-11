@@ -1,27 +1,40 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using UnityEngine.Audio;
     using System;
     using UnityEngine;
 
+    /// <summary>
+    /// Act as a Singleton Dictionary so other objects can access to any sound they want to play.
+    /// It must be filled in the inspector with all music and sounds.
+    /// </summary>
     public class AudioManager : Singleton<AudioManager>
     {
 
         /* 
-         * AudioManager, contains every Sounds ans music played, in a Sound[] array, same for musics.
+         * 
+         * All Sounds (including music) are encapsulated in the Sound class to parametrize them.
+         * (See Sound and SoundList classes)
+         * 
+         * To be honest, it's not a very efficient solution.
+         * 
+         * This whole game current Audio management is a ugly workaround built around Brackey's AudioManager and Sound class.
+         * (See Brackey's Youtube Channel)
          * */
 
-        //Sounds
+        //Individual Sounds
         [SerializeField]
         private Sound[] sounds;
 
-
+        //List of similar sounds that can be swapped.
         [SerializeField]
         private SoundList[] soundLists;
         
+        //Globals sounds
+
+        //Main music
         public Sound music;
 
-
+        //Ambient Sounds
         public Sound ambientSound;
 
         public Sound[] Sounds { get => sounds; set => sounds = value; }
@@ -30,33 +43,38 @@
         void Awake()
         {
 
+            //Initialize sounds lists
             foreach (SoundList list in soundLists)
             {
                 soundLists.Initialize();
             }
 
 
-
-            //Choose a random first music.
-            //num_music = UnityEngine.Random.Range(0, musics.Length);
-
-            //We initialize the music the same way than for the sound, but just once this time.
+            //Initialize the music
             if (music != null)
             {
                 music.source = gameObject.AddComponent<AudioSource>();
                 LoadMusic(music);
             }
+            //Initialize the ambient sounds
             if (ambientSound != null)
             {
                 ambientSound.source = gameObject.AddComponent<AudioSource>();
                 LoadAmbient(ambientSound);
             }
+
+            //Play them
             music.source.Play();
             ambientSound.source.Play();
 
         }
 
         #region Public Methods
+
+        /// <summary>
+        /// Load the given Sound in the music source slot.
+        /// </summary>
+        /// <param name="mus"></param>
         public void LoadMusic(Sound mus)
         {
             LoadSound(music.source, mus);
@@ -64,12 +82,21 @@
         }
 
 
+        /// <summary>
+        /// Load the given Sound in the ambient music source slot.
+        /// </summary>
+        /// <param name="mus"></param>
         public void LoadAmbient(Sound mus)
         {
             LoadSound(ambientSound.source, mus);
         }
 
-            public static void LoadSound(AudioSource source, Sound sound)
+        /// <summary>
+        /// Load a Sound in the given source.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="sound"></param>
+        public static void LoadSound(AudioSource source, Sound sound)
         {
             source.clip = sound.clip;
             source.volume = sound.Volume;
@@ -81,7 +108,12 @@
             source.rolloffMode = AudioRolloffMode.Linear;
         }
 
-        //Return the Sound object with the name given. Used by other objets to access the sounds they want to play.
+        /// <summary>
+        /// Return the Sound object with the given name. 
+        /// Used by other objets to access the sounds they want to play.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Sound Find(string name)
         {
             Sound s = Array.Find(Sounds, sound => sound.name == name);
@@ -100,6 +132,12 @@
             return s;
         }
 
+        /// <summary>
+        /// Return the SoundList with the given name. 
+        /// Used by other objets to access the sounds they want to play.        
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public SoundList FindList(string name)
         {
             SoundList s = Array.Find(soundLists, list => list.Name == name);
@@ -110,31 +148,8 @@
             return s;
         }
 
-        //Mute all SFX sounds
-        public void MuteAllSounds()
-        {
-            foreach (Sound s in Sounds)
-                s.source.mute = true;
-        }
         #endregion
 
-        //Unmute all sounds
-
-        //Pause all sounds.
-        public void PauseAll()
-        {
-            foreach (Sound s in Sounds)
-                s.source.Pause();
-            music.source.Pause();
-        }
-        //Resume all sounds.
-        public void ResumeAll()
-        {
-            foreach (Sound s in Sounds)
-                s.source.UnPause();
-            music.source.UnPause();
-        }
-        
 
     }
 }
