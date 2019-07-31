@@ -1,16 +1,13 @@
 ﻿namespace WGJ.PuppetShadow
 {
-
-
-    using Light2D;
-    using System.Collections;
-    using System.Collections.Generic;
+    
     using UnityEngine;
     
     public class FlickerLight : LightController
     {
         [Header("Flicker")]
 
+        // Values for flicker with a constant on and off durations.
         [SerializeField]
         private bool randomFlicker = false;
         [Header("Constant Flicker")]
@@ -22,6 +19,7 @@
         private float lightOffDuration;
 
         [Header("Random Flicker")]
+        //Values for flickers with a random On and Off ranges.
         [SerializeField]
         private Vector2 randomFlickerRangeOn;
         [SerializeField]
@@ -45,6 +43,7 @@
         void Update()
         {
             timer += Time.deltaTime;
+            //every so often, switch the light on/off depending on the duration of the current mode.
             if (timer > duration)
             {
                 SwitchOnOff();
@@ -65,6 +64,10 @@
             timer = 0f;
         }
 
+        /// <summary>
+        /// Pick a new duration for the current light mode, depending on if it's random or not, and on or off.
+        /// </summary>
+        /// <returns></returns>
         private float PickNewDuration()
         {
             
