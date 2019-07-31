@@ -1,31 +1,31 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
+    /// <summary>
+    /// State that contains the IA to make a Shadow Puppet pursue the player.
+    /// </summary>
     public class StatePursuit : State
     {
+        //Keep track at how much time passed since last time the path to the player position
         private float timePursuit = 0f;
-        public override void StartState()
-        {
-        }
 
         public override void Update()
         {
             //Go toward the player
-
-            float distance = stateMachine.DistanceWithPlayer();
-
+            float distance = stateMachine.GetDistanceWithPlayer();
+            
             if (!stateMachine.Puppet.IsMoving)
             {
+                //If we are not very close to the player, pursue them
                 if (distance > 1f)
                 {
                     Pursuit();
                 }
                 else
                 {
-                    IdleFloat();
+                    //else float on them.
+                    IdleFloat(); //last 1 second
                 }
             }
             else
@@ -41,7 +41,7 @@
                 {
                     Pursuit();
                 }
-                //Every 5 seconds, recalculate a path.
+                //Every 5 seconds, recalculate a path anyway.
                 if (timePursuit > 5f)
                 {
                     Pursuit();
@@ -55,21 +55,28 @@
 
         public override void EndState()
         {
+            //On end of state, stop the movement of the puppet to avoid further conflicts.
             stateMachine.Puppet.StopMovement();
         }
 
+        /// <summary>
+        /// Calculate the path and make the puppet go to the player position.
+        /// </summary>
         private void Pursuit()
         {
             stateMachine.Puppet.StopMovement();
             stateMachine.Puppet.MoveTo(stateMachine.Target.position);
-            timePursuit = 0f;
+            timePursuit = 0f; //reset pursuit count
         }
 
+        /// <summary>
+        /// Float aimlessly for a second.
+        /// </summary>
         private void IdleFloat()
         {
             stateMachine.Puppet.StopMovement();
             stateMachine.Puppet.StartIdlingFloat(1f);
-            timePursuit = 0f;
+            timePursuit = 0f; //reset pursuit count
         }
     }
 }
