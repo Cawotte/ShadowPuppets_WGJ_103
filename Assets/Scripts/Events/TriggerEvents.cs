@@ -1,6 +1,5 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using System;
@@ -8,7 +7,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Component to trigger events when colliding with certains marker triggerers (TriggererEvents) 
+    /// Component to trigger events when colliding with certains marked triggerers (TriggererEvents) 
     /// </summary>
     public class TriggerEvents : MonoBehaviour
     {

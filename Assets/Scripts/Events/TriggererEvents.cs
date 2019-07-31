@@ -5,7 +5,7 @@
     using UnityEngine;
 
     /// <summary>
-    /// Like a collision layer, but for trigger Interactables.
+    /// Component attached to gameobject to make its collider trigger Interactable on shared TriggerTypes
     /// </summary>
     public class TriggererEvents : MonoBehaviour
     {
