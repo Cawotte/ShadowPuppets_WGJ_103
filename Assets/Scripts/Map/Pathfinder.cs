@@ -1,11 +1,12 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.Tilemaps;
     using System.Linq;
 
+    /// <summary>
+    /// Used the A* Algorithm to find a path in a Map.
+    /// </summary>
     public class Pathfinder
     {
         private Map mapGrid;
@@ -17,6 +18,7 @@
             rand = new System.Random();
         }
 
+        //Get a path from start to goal world positions.
         public TilePath GetPath(Vector3 startWorldPos, Vector3 goalWorldPos)
         {
 
@@ -177,6 +179,10 @@
 
 
         #region Pathfinding Cell classes
+
+        /// <summary>
+        /// Base class that holds the core informations about a tile for the pathfinding algorithms.
+        /// </summary>
         private class PathCell
         {
             public Vector2Int GridPosition;
@@ -189,6 +195,7 @@
 
             public override bool Equals(object obj)
             {
+                //Tiles are diffentiated by their coordinates.
                 if (obj is PathCell && obj != null)
                 {
                     return GridPosition == ((PathCell)obj).GridPosition;
@@ -204,6 +211,9 @@
                 return GridPosition.GetHashCode();
             }
         }
+        /// <summary>
+        /// Class that holds the core informations about a tile for the A* algorithm
+        /// </summary>
         private class StarCell : PathCell
         {
             public float GScore = 0; //start => this

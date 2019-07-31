@@ -1,19 +1,19 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using System;
-    using UnityEngine.Tilemaps;
 
+    /// <summary>
+    /// Class that hold a tile data, read from a tilemap.
+    /// </summary>
     [Serializable]
     public class TileNode
     {
         [SerializeField][ReadOnly]
-        private Vector3Int cellPos;
+        private Vector3Int cellPos; //Pos of the cell in the Grid.
 
         [SerializeField][ReadOnly]
-        private Vector3 centerWorld;
+        private Vector3 centerWorld; //Pos of the cell in World.
 
         [SerializeField]
         [ReadOnly]
@@ -32,6 +32,10 @@
             this.isObstacle = isObstacle;
         }
 
+        /// <summary>
+        /// Use the bottom center of the tile + a random X offset to get a spawn point in that tile.
+        /// </summary>
+        /// <returns></returns>
         public Vector3 GetRandomSpawnPoint()
         {
             return centerWorld +

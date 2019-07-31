@@ -1,18 +1,18 @@
 ﻿namespace WGJ.PuppetShadow
 {
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using System.Linq;
 
-
+    /// <summary>
+    /// Class that contains the resulting Path of a pathfinding algorithm, as a list of tile.
+    /// </summary>
     public class TilePath
     {
-        private TileNode[] path;
-        private TilePath simplifiedPath;
-        private Vector3Int[] directionPath;
-
-        public TileNode[] Path { get => path;  }
+        private TileNode[] path;  //Full path
+        private TilePath simplifiedPath; //Paths that only contains tiles where a turn need to be made.  
+        private Vector3Int[] directionPath; //Path with only the directions to the next tile.
+        
 
         public TileNode Start
         {
@@ -32,7 +32,7 @@
         {
             get => (path == null) ? 0 : path.Length;
         }
-        public Vector3Int[] DirectionPath { get => directionPath;  }
+
         public TilePath SimplifiedPath { get => simplifiedPath;  }
 
         public TileNode this[int i]
@@ -60,36 +60,7 @@
             }
         }
 
-
-
-        public Stack<TileNode> GetReversePath()
-        {
-            return new Stack<TileNode>(path);
-        }
-
-        public Vector3[] GetWorldPath()
-        {
-            Vector3[] cellPath = new Vector3[Size];
-
-            for (int i = 0; i < Size; i++)
-            {
-                cellPath[i] = path[i].CenterWorld;
-            }
-
-            return cellPath;
-        }
-
-        public Vector3Int[] GetCellPath()
-        {
-            Vector3Int[] cellPath = new Vector3Int[Size];
-
-            for (int i = 0; i < Size; i++)
-            {
-                cellPath[i] = path[i].CellPos;
-            }
-
-            return cellPath;
-        }
+        
 
         private void LoadDirectionPath()
         {

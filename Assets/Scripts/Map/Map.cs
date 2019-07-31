@@ -6,7 +6,11 @@
     using System;
     using UnityEngine.Tilemaps;
 
+    /// <summary>
+    /// Class used to save and use the data read from tilemaps. 
+    /// </summary>
     [Serializable]
+    
     public class Map
     {
 
@@ -20,8 +24,10 @@
         private Tilemap tilemap;
 
         [SerializeField]
+        //Contains all the tiles.
         private Serializable2DArray<TileNode> mapGrid;
 
+        //List of possible spawn tiles for puppets.
         private List<TileNode> possibleSpawns = new List<TileNode>();
 
         #region Properties
@@ -182,11 +188,7 @@
 
             return tile.CenterWorld;
         }
-
-        public static int GetManhattanDistance(Vector2 A, Vector2 B)
-        {
-            return (int)Math.Abs(B.x - A.x) + (int)Math.Abs(B.y - A.y);
-        }
+        
 
         /// <summary>
         /// Return the tile at the given CellPos by reading tilemaps.
@@ -237,6 +239,9 @@
 
         }
 
+        /// <summary>
+        /// Get all possible spawn tiles in the map.
+        /// </summary>
         private void LoadPossibleSpawns()
         {
             for (int y = 1; y < Height; y++)
