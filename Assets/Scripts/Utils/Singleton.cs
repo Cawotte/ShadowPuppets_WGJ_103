@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
+/// <summary>
+/// Singleton class. Not mine, copypasted from Stack Overflow!
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class Singleton<T> : Singleton where T : MonoBehaviour
 {
     #region  Fields

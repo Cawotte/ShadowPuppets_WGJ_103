@@ -3,6 +3,11 @@
 
     using System;
 
+    /// <summary>
+    /// It's a 2D Array, but Serializable by the Unity inspector as a single dim array, because it's 
+    /// a single dim array used as a 2D array.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Serializable]
     public class Serializable2DArray<T>
     {
